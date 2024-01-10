@@ -1,100 +1,111 @@
-import { GET_COUNTRIES, GET_COUNTRY, GET_COUNTRIES_BY_NAME, FILTER_BY_CONTINENT,
-    ORDER_BY_NAME, POST_ACTIVITY, GET_ACTIVITIES, ORDER_BY_POPULATION, FILTER_BY_ACTIVITY} from "./actions-types";
+// Actions
+import {
+    GET_COUNTRIES,
+    SEARCH_COUNTRIES,
+    SET_CURRENT_PAGE,
+    RESET_COUNTRIES,
+    RESET_ACTIVITIES,
+    FILTER_COUNTRIES_BY_CONTINENT,
+    FILTER_COUNTRIES_BY_ACTIVITY,
+    DELETE_ACTIVITY,
+    SORT_COUNTRIES_BY_NAME_ASCENDING,
+    SORT_COUNTRIES_BY_NAME_DESCENDING,
+    SORT_COUNTRIES_BY_POPULATION_ASCENDING,
+    SORT_COUNTRIES_BY_POPULATION_DESCENDING
+} from './actionTypes';
 
-const initialState = {
-countries: [],
-allCountries:[],
-country: [],
-activities: [],
-}
 
-const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
+const initialState= {
+    countries: [],
+    allCountries: [],
+    currentPage: 1,
+};
 
+const rootReducer = ( state = initialState, {type, payload}) => {
+    switch (type) {
         case GET_COUNTRIES:
             return {
                 ...state,
-                countries: action.payload,
-                allCountries: action.payload,
+                allCountries: payload,
+                countries: payload
             }
+            //* SEARCH QUE FUNCIONA
+        // case SEARCH_COUNTRIES:
+        //     return {
+        //         ...state,
+        //         countries: payload
+        //     }
+            case SEARCH_COUNTRIES:
+    return {
+        ...state,
+        countries: payload,
+    };
 
-        case GET_COUNTRY:
-            return { ...state, country: action.payload }
-
-        case GET_COUNTRIES_BY_NAME:
+        case SET_CURRENT_PAGE:
             return {
                 ...state,
-                countries: action.payload
+                currentPage: payload
             }
-
-
-        case GET_ACTIVITIES:
-            return { ...state, activities: action.payload }
-
-        case POST_ACTIVITY:
-            return { ...state }
-
-        case FILTER_BY_CONTINENT:
-            const allCountries = state.allCountries;
-            const filterContinent = action.payload === 'All' ? allCountries : allCountries.filter(element => element.continent === action.payload)
-
+        case RESET_COUNTRIES:
             return {
                 ...state,
-                countries: filterContinent
+                countries: state.allCountries
             }
 
 
-        case ORDER_BY_NAME:
+        case RESET_ACTIVITIES:
+                return {
+                    ...state,
+                    activities: state.allActivities
+                }
 
-            const OrderCountries = [...state.allCountries];
-            const OrderCountriesall = action.payload === 'asc' ?
-                OrderCountries.sort((a, b) => a.name.localeCompare(b.name))
-                :
-                OrderCountries.sort((a, b) => b.name.localeCompare(a.name));
+        case DELETE_ACTIVITY:
+                    // Filtra las actividades para eliminar la actividad con el ID enviado en payload
+             const updatedActivities = state.allActivities.filter(activity => activity.id !== payload);
+              
+             return {
+                 ...state,
+                 allActivities: updatedActivities,
+                 activities: updatedActivities // Actualiza la lista de actividades en el estado global
+                    };
 
+
+
+
+
+        case FILTER_COUNTRIES_BY_CONTINENT:
             return {
                 ...state,
-                countries: OrderCountriesall
+                countries: payload
             }
-
-        case ORDER_BY_POPULATION:
-            const OrderPopulation = [...state.allCountries];
-
-            const OrderPopulationall = action.payload === 'Mayor' ?
-                OrderPopulation.sort((a, b) => b.population - a.population)
-                :
-                OrderPopulation.sort((a, b) => a.population - b.population);
-
-            console.log(OrderPopulationall)
-
+        case FILTER_COUNTRIES_BY_ACTIVITY:
+            return{
+                ...state,
+                countries: payload
+            }
+        case SORT_COUNTRIES_BY_NAME_ASCENDING:
             return {
                 ...state,
-                countries: OrderPopulationall
+                countries: [...state.countries].sort((a,b) => a.name.localeCompare(b.name))
             }
-
-
-        case FILTER_BY_ACTIVITY:
-            const FilterByActivity = [...state.allCountries];
-            const activityName = action.payload;
-            console.log(activityName)
-            console.log(state.activities)
-            const filteredActivities = state.activities
-            .filter(activity => activity.name === activityName)
-            .flatMap(activity => activity.Countries)
-            .map(country => country.name);
-
-            const filteredCountries = FilterByActivity.filter(obj => filteredActivities.includes(obj.name))
-            console.log(filteredCountries)
+        case SORT_COUNTRIES_BY_NAME_DESCENDING:
             return {
                 ...state,
-                countries: filteredCountries,
+                countries: [...state.countries].sort((a,b) => b.name.localeCompare(a.name))
             }
-
+        case SORT_COUNTRIES_BY_POPULATION_ASCENDING:
+            return {
+                ...state,
+                countries: [...state.countries].sort((a,b) => b.poblacion - a.poblacion)
+            }
+        case SORT_COUNTRIES_BY_POPULATION_DESCENDING:
+            return {
+                ...state,
+                countries: [...state.countries].sort((a,b) => a.poblacion - b.poblacion)
+            }
         default:
-            return { ...state };
+            return {...state}
     }
 }
-
-
 
 export default rootReducer;

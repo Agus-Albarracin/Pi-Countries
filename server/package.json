@@ -6,24 +6,28 @@
   "scripts": {
     "server": "nodemon index.js",
     "api": "echo 'Local API listening on PORT 5000' & json-server --watch api/db.json -p 5000 -q",
-    "start": "concurrently \"npm run server\" \"npm run api\""
+    "start": "concurrently \"npm run server\" \"npm run api\"",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.6.2",
+    "body-parser": "^1.20.2",
     "concurrently": "^8.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "fs": "^0.0.1-security",
     "json-server": "^0.17.3",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.0.2",
     "npm-run-all": "^4.1.5",
-    "path": "^0.12.7",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.35.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
   }
 }

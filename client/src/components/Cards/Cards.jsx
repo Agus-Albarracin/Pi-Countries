@@ -1,19 +1,21 @@
+// Components
 import Card from '../Card/Card';
-import './Cards.css';
+// Styles
+import styles from './Cards.module.css';
 
-export default function Cards(props) {   
-   const { countries } = props;
-
-   return (
-   <div className='Cards-container'>
-      {countries.map((element) => (
-         <Card
-         key={element.countryId}
-         id={element.countryId}
-         image={element.flag}
-         name={element.name}
-         continent={element.continent}
-         />))}
-   </div>
-   )
+const Cards = ({currentCards}) => {
+    return (
+        <div className={styles.container}>
+            {currentCards.map((country, index) => (
+                <Card
+                key={country?.id || index}
+                id={country?.id}
+                name={country?.name}
+                image={country?.image}
+                continente={country?.continente} />
+            ))}
+        </div>
+    )
 }
+
+export default Cards;

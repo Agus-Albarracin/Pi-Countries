@@ -1,0 +1,33 @@
+.sortDiv{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 130px;
+    z-index: 100;
+    margin-bottom: -60px
+}
+
+.paginado{
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    margin-top: 100px
+}
+
+.btn{
+    max-height: 40px;
+    padding: 6px;
+    margin: 10px;
+    border-radius: 5px;
+    border-color: rgb(2, 2, 80);
+    background-color: rgb(252, 252, 252);
+    color: black;
+    transition: background-color 0.2s ease-out 0.2s;
+    &:hover{
+        background-color: rgb(2, 2, 80);
+        color: rgb(252, 252, 252);
+    }
+}
+
+

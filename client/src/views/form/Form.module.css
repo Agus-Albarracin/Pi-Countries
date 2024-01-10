@@ -1,0 +1,60 @@
+.formDiv {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 5%; /* Modifica según necesites */
+}
+
+.form {
+    width: 90%; /* Cambié a porcentaje */
+    max-width: 400px; /* Agregué un máximo */
+    height: auto; /* Cambié a auto para ajustarse */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 0.5vw solid rgb(44, 46, 47); /* Usé vw para el borde */
+    border-radius: 0.5em;
+    position: relative;
+    background-color: rgba(6, 6, 6, 0.700);
+    color: rgb(194, 142, 32);
+    text-align: start;
+    padding: 2%; /* Cambié a porcentaje */
+    box-shadow: 0px 0px 2vw rgb(0, 0, 0); /* Usé vw para la sombra */
+    margin-bottom: 3vh; /* Usé vh para el margen */
+}
+
+.label {
+    display: block;
+    margin-bottom: 1%; /* Modifica según necesites */
+}
+
+.input,
+.select,
+.btn {
+    width: 98%;
+    padding: 2%;
+    border-radius: 1em;
+    border: 0.3vw solid rgb(5, 5, 5); /* Usé vw para el borde */
+    background-color: white;
+    color: black;
+    box-sizing: border-box;
+}
+
+.select {
+    max-width: 50%; /* Modifica según necesites */
+}
+
+.btn {
+    max-height: 5vh; /* Usé vh para la altura */
+    transition: background-color 0.2s ease-out 0.2s;
+}
+
+.btn:hover {
+    background-color: rgb(194, 142, 32);
+    color: black;
+}
+
+.errorMessage {
+    color: red;
+}

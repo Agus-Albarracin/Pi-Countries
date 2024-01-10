@@ -1,22 +1,22 @@
+const { Router } = require("express");
+// Activities
+const getActivities = require('../controllers/activities/getActivities')
+const postActivities = require('../controllers/activities/postActivities')
 
-const getAllCountries = require('../controllers/getAllCountries')
-const getCountriesByName = require('../controllers/getCountriesByName')
-const getCountriesById = require('../controllers/getCountriesById')
-const postActivities = require('../controllers/postActivities')
-const getActivities = require('../controllers/getActivities');
-const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
 
+// Countries
+const getCountries = require('../controllers/countries/getCountries')
+const getCountriesById = require('../controllers/countries/getCountriesById')
+const getCountryByName = require('../controllers/countries/getCountriesByName')
 
 const router = Router();
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-router.get('/countries', getAllCountries);
-router.get('/countries/name', getCountriesByName );
-router.get('/countries/:idPais', getCountriesById);
-router.post('/activities', postActivities);
-router.get('/activities', getActivities);
+router.get('/countries', getCountries)
+router.get('/countries/:id', getCountriesById)
+router.get('/country', getCountryByName)
+
+router.get('/activities', getActivities)
+router.post('/activities', postActivities)
+
 
 module.exports = router;

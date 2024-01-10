@@ -1,29 +1,25 @@
-import './Card.css'
-import { useNavigate } from 'react-router-dom';
-import { connect } from 'react-redux';
+// Router
+import { Link } from 'react-router-dom';
+// Styles
+import styles from './Card.module.css'
 
-function Card(props) {
-    const navigate = useNavigate();
-
-    function navigateHandler() {
-        navigate(`/detail/${props.id}`)
-     }
-
-   return (
-    <div key={props.key} country={props.country} className='card-container' onClick={navigateHandler}>
-        <img className='img' src={props.image} alt='img-flag' width="300px" height="125px" />
-        <div className='text-container'>
-            <h1 className='card-title'>{props.name}</h1>
-            <p className='card-continent'>{props.continent}</p>
-        </div>
-</div>
-)
+const Card = ({ id, name, image, continente }) => {
+    return (
+        <div className={styles.card}>
+        <Link to={`/detail/${id}`} className={styles.linkStyle}>
+          <div className={styles.imageContainer}>
+            <img src={image} alt="" className={styles.image} />
+          </div>
+          <div className={styles.details}>
+            <div className={styles.nameId}>
+              <h2 className={styles.title}>{name}</h2>
+              <h2 className={styles.id}>{id}</h2>
+            </div>
+            <h2 className={styles.continente}>Continente: {continente}</h2>
+          </div>
+        </Link>
+      </div>
+    )
 }
 
-const mapStateToProps = (state) =>{
-    return {
-        countries: state.countries,
-    };
- }
- 
- export default connect(mapStateToProps)(Card);
+export default Card;
