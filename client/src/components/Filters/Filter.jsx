@@ -14,13 +14,14 @@ const Filter = () => {
             dispatch(resetActivities());
         } else {
             dispatch(filterCountriesByContinent(continent));
-            dispatch(resetActivities()); // Reinicia las actividades al cambiar el continente
+
         }
     };
     return (
         <div>
             <select onChange={handleChange} className={styles.select}>
                 <option value="all">Seleccione los continentes</option>
+                <option value="all">Todos los continentes</option>
                 <option value="Africa">Africa</option>
                 <option value="Americas">America</option>
                 <option value="Asia">Asia</option>

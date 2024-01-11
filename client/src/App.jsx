@@ -7,7 +7,7 @@ import PATHROUTES from './helpers/PathRoutes.helper'
 // Views
 import Landing from './views/Landing/Landing.view'
 import Home from './views/Home/Home.view'
-import Detail from './views/Detail/Detail.view'
+import Detail from './views/detail/Detail.view'
 import Form from './views/Form/Form.view'
 import Error from './views/Error/Error.view'
 // Component
