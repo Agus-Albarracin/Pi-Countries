@@ -23,8 +23,8 @@ const Detail = () => {
         })
 
         
-        .catch((err) => {
-            console.log(err)
+        .catch((error) => {
+            console.log(error)
             alert('Hubo un error al buscar el país.')
         })
     }, [id]);

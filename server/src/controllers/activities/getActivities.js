@@ -10,7 +10,13 @@ const getActivities = async (req,res) => {
                 //Esta funcion me permite traer solo el nombre del country
             }
         });
-        if (allActivities.length === 0) return res.status(404).json('No se encontraron actividades');
+        
+        if (allActivities === undefined) return res.status(404).json('No se encontraron actividades');
+        // if(allActivities.lenght === 0)
+        //el condicional .lenght me tirando un error como si la ruta no se encontraba, a pesar de que existia cuando la comunicaba con
+        //el front, ya que su condicional era si tenia un array en 0
+
+
         allActivities = allActivities.map(activity => {
             activity = activity.get({ plain: true });
             // el .get() nos trae informacion de la base de datos.

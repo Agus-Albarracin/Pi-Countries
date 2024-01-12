@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
 import PATHROUTES from '../../helpers/PathRoutes.helper';
+import { useNavigate, Link } from 'react-router-dom';
+import styles from './SingUp.module.css';
 
-// Styles
-import styles from './Landing.module.css';
-
-const LogInComponent = () => {
+const SignUpComponent = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -19,8 +17,6 @@ const LogInComponent = () => {
     password: '',
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
@@ -30,11 +26,11 @@ const LogInComponent = () => {
       [name]: value,
     });
 
+    // Realizar validaciones en tiempo real mientras el usuario escribe
     validateInput(name, value);
   };
 
   const validateInput = (name, value) => {
-    // ... (tu código de validación actual)
     switch (name) {
       case 'email':
         setErrors({
@@ -58,29 +54,26 @@ const LogInComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Realizar las validaciones finales antes de enviar la solicitud
     if (validateForm()) {
       try {
-        setIsSubmitting(true);
-        const response = await axios.post('http://localhost:3001/login', {
+        const response = await axios.post('http://localhost:3001/singup', {
           email: formData.email,
           password: formData.password,
         });
 
-        console.log('Inicio de sesión exitoso:');
-
-        // Redirigir al usuario a la página principal después de iniciar sesión
-        navigate('/home');
+        console.log('Usuario registrado con éxito:');
+        // Redirigir al usuario después del registro exitoso
+        navigate(PATHROUTES.LANDING);
       } catch (error) {
-        console.error('Error al iniciar sesión:', error.message);
-        alert('Error al iniciar sesión. Por favor, verifica tus credenciales.');
-      } finally {
-        setIsSubmitting(false);
+        console.error('Error al registrar usuario:', error.message);
+        // Mostrar un mensaje al usuario sobre el error
+        alert("Error al registrar usuario. Verifica tus datos e intenta nuevamente.");
       }
     }
   };
 
   const validateForm = () => {
-    // ... (tu código de validación actual)
     return Object.values(errors).every((error) => error === '');
   };
 
@@ -91,13 +84,13 @@ const LogInComponent = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h2>Iniciar Sesión</h2>
+        <h2>Registro de Usuario</h2>
         <form onSubmit={handleSubmit}>
-          <label>MAIL:  </label>
+          <label>Email:</label>
           <input type="text" name="email" value={formData.email} onChange={handleChange} />
           {errors.email && <p className={styles.error}>{errors.email}</p>}
-          <br></br>
-          <label>PASS:  </label>
+
+          <label>Password:</label>
           <input
             type={showPassword ? 'text' : 'password'}
             name="password"
@@ -106,26 +99,22 @@ const LogInComponent = () => {
           />
           {errors.password && <p className={styles.error}>{errors.password}</p>}
 
-          <div className={styles.checkbox}>
-            <input
-              type="checkbox"
-              id="showPassword"
-              checked={showPassword}
-              onChange={togglePasswordVisibility}
-            />
-            <label htmlFor="showPassword">Mostrar{""}contraseña</label>
-          </div>
+        <div className={styles.checkbox}>
+          <input
+            type="checkbox"
+            id="showPassword"
+            checked={showPassword}
+            onChange={togglePasswordVisibility}
+          />
+          <label htmlFor="showPassword">Mostrar{""}contraseña</label>
+         </div>
           <br></br>
-          <button type="submit" disabled={isSubmitting}>
-            Iniciar Sesión
-          </button>
+          <button type="submit">Registrarse</button>
+        <p>¿Ya tienes una cuenta? <Link to={PATHROUTES.LANDING}>Ingresa</Link></p>
         </form>
-      <p>
-        No tienes una cuenta aún? <Link to={PATHROUTES.SINGUP}>Crear cuenta</Link>
-      </p>
       </div>
     </div>
   );
 };
 
-export default LogInComponent;
+export default SignUpComponent;

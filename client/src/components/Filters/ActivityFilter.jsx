@@ -8,7 +8,6 @@ const ActivityFilter = ({ selectedActivity, setSelectedActivity }) => {
     const dispatch = useDispatch();
     const [activities, setActivities] = useState([]);
     const [activity, setActivity] = useState("all");
-    
 
     
  // useEffect(() => {
@@ -42,16 +41,15 @@ const ActivityFilter = ({ selectedActivity, setSelectedActivity }) => {
     // }, [loadingError]);
 
     useEffect(() => {
-
-
+      
         const filterActivities = async () => {
+            
             try {
                  const response = await axios.get("http://localhost:3001/activities");
-                         console.log('Response:', response);
+                        
                      if (response.status === 200) {
                             const activityNames = response.data.map((activity) => activity.name);
-                            setActivities(activityNames);
-                            console.log(activities)
+                            setActivities(activityNames);          
                         }
             }
             catch (error) {

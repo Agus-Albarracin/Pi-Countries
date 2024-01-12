@@ -11,10 +11,14 @@ import {
     SORT_COUNTRIES_BY_NAME_ASCENDING,
     SORT_COUNTRIES_BY_NAME_DESCENDING,
     SORT_COUNTRIES_BY_POPULATION_ASCENDING,
-    SORT_COUNTRIES_BY_POPULATION_DESCENDING
+    SORT_COUNTRIES_BY_POPULATION_DESCENDING,
 } from './actionTypes';
+
+
 // Axios
 import axios from 'axios';
+
+
 
 export const getCountries = () => {
 

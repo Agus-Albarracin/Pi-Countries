@@ -9,6 +9,11 @@ const getCountries = require('../controllers/countries/getCountries')
 const getCountriesById = require('../controllers/countries/getCountriesById')
 const getCountryByName = require('../controllers/countries/getCountriesByName')
 
+//User
+
+const singUpUser = require("../controllers/singAndLogin/singup")
+const logInUser = require("../controllers/singAndLogin/logIn")
+
 const router = Router();
 
 router.get('/countries', getCountries)
@@ -17,6 +22,9 @@ router.get('/country', getCountryByName)
 
 router.get('/activities', getActivities)
 router.post('/activities', postActivities)
+
+router.post("/login", logInUser)
+router.post("/singup", singUpUser)
 
 
 module.exports = router;

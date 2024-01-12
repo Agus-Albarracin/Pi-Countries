@@ -21,8 +21,10 @@ const initialState= {
     currentPage: 1,
 };
 
+
 const rootReducer = ( state = initialState, {type, payload}) => {
     switch (type) {
+            
         case GET_COUNTRIES:
             return {
                 ...state,
