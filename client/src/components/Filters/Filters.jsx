@@ -131,7 +131,7 @@ const Filters = ({ selectedActivity, setSelectedActivity }) =>{
 
 return (
 <div name="BoxAllFilters" className={styles.BoxAllFilters}>
-    
+
         <div name="BoxFilterSort" className={styles.BoxFilterSort}>
         <select onChange={handleSortChange} id="selectSortFilter" className={styles.select}>
             <option value="unsorted">Ordenar por...</option>

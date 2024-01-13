@@ -8,9 +8,9 @@ conn.sync({ force: true }).then(
 
 async() => { await syncApiDb();
   
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-})
+        server.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
+        })
 
 })
 
