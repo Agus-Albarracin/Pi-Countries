@@ -9,6 +9,7 @@ import Cards from '../../components/Cards/Cards';
 import Filter from '../../components/Filters/Filter';
 import ActivityFilter from '../../components/Filters/ActivityFilter';
 import Sort from '../../components/Sort/Sort';
+import Filters from '../../components/Filters/Filters';
 // Styles
 import styles from './Home.module.css';
 
@@ -39,24 +40,14 @@ const Home = () => {
 
 
 
-    const handleContinentChange = (event) => {
-        const continent = event.target.value;
-        if (continent === "all") {
-            dispatch(resetCountries());
-            setSelectedActivity("all"); 
-        } else {
-            dispatch(filterCountriesByContinent(continent));
-        }
-    }
-
-
     
     return(
         <div>
             <div className={styles.sortDiv}>
-                <Sort />
-                <Filter onChange={handleContinentChange} />
-                <ActivityFilter selectedActivity={selectedActivity} setSelectedActivity={setSelectedActivity} />
+                {/* <Sort /> */}
+                <Filters selectedActivity={selectedActivity} setSelectedActivity={setSelectedActivity} />
+                {/* <Filter onChange={handleContinentChange} />
+                <ActivityFilter selectedActivity={selectedActivity} setSelectedActivity={setSelectedActivity} /> */}
             </div>
             <div>
                 <Cards currentCards={currentCards} />

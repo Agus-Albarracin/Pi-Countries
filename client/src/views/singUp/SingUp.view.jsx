@@ -63,6 +63,7 @@ const SignUpComponent = () => {
         });
 
         console.log('Usuario registrado con éxito:');
+        alert("Se ha registrado con éxito")
         // Redirigir al usuario después del registro exitoso
         navigate(PATHROUTES.LANDING);
       } catch (error) {

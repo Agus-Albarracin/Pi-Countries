@@ -4,7 +4,7 @@ const {User} = require("../../db")
 const singUpUser = async (req, res) => {
     
     try{
-    let {email, password} = req.body;
+        let {email, password} = req.body;
     if(!email || !password) return res.status(400).send("Faltan ingresar datos.")
 
     let [user, seCreoUser] = await User.findOrCreate({

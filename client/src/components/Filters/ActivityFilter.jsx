@@ -70,9 +70,10 @@ const ActivityFilter = ({ selectedActivity, setSelectedActivity }) => {
     const handleActivityChange = (event) => {
 
             const activity = event.target.value; 
+            console.log(activity)
             setSelectedActivity(activity);
 
-            if (activity === "all") { dispatch(resetCountries());}
+            if (activity === "allfilter") { dispatch(resetCountries());}
             else { dispatch(filterCountriesByActivity(activity));}
 
    };
@@ -80,8 +81,8 @@ const ActivityFilter = ({ selectedActivity, setSelectedActivity }) => {
 
         return (
             <div>
-                <select onChange={handleActivityChange} className={styles.select} value={selectedActivity}>
-                    <option value="all">Seleccione actividad</option>
+                <select onChange={handleActivityChange} id="selectActivityFilter" className={styles.select} value={selectedActivity}>
+                    <option value="allfilter">Seleccione actividad</option>
                     {activities.map(activity => (
                         <option key={activity} value={activity}>{activity}</option>
                     ))}
