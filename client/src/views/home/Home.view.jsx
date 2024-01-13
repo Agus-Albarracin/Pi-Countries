@@ -6,9 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCountries, setCurrentPage, filterCountriesByContinent } from '../../redux/actions';
 // Components
 import Cards from '../../components/Cards/Cards';
-import Filter from '../../components/Filters/Filter';
-import ActivityFilter from '../../components/Filters/ActivityFilter';
-import Sort from '../../components/Sort/Sort';
 import Filters from '../../components/Filters/Filters';
 // Styles
 import styles from './Home.module.css';
@@ -44,10 +41,9 @@ const Home = () => {
     return(
         <div>
             <div className={styles.sortDiv}>
-                {/* <Sort /> */}
+                
                 <Filters selectedActivity={selectedActivity} setSelectedActivity={setSelectedActivity} />
-                {/* <Filter onChange={handleContinentChange} />
-                <ActivityFilter selectedActivity={selectedActivity} setSelectedActivity={setSelectedActivity} /> */}
+
             </div>
             <div>
                 <Cards currentCards={currentCards} />
