@@ -19,7 +19,7 @@ const NavBar = () => {
                     <h1>Home</h1>
                 </Link>
                 <Link to={PATHROUTES.FORM} className={styles.title}>
-                    <h1>Crear Actividades</h1>
+                    <h1>Actividades</h1>
                 </Link>
             </div>
             <div className={styles.searchBar}>

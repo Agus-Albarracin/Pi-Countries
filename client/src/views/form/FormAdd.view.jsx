@@ -132,7 +132,9 @@ try {
 
   return (
     <div className={styles.formDiv}>
-
+    <Link to="/form" className={styles.linkDiv}
+    style={{ textDecoration: 'none', color: 'inherit' }}>
+         <button type="submit">Volver </button> </Link>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Añade un país a la actividad</h1>
 
@@ -180,9 +182,6 @@ try {
         </section>
 
       </form>
-      <Link to="/form" className={styles.linkDiv}
-    style={{ textDecoration: 'none', color: 'inherit' }}>
-         <button type="submit">Volver </button> </Link>
     </div>
   );
 };
