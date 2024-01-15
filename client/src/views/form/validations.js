@@ -11,8 +11,8 @@ export const validateName = (name) => {
   };
   
   export const validateDuracion = (duracion) => {
-    return !duracion || duracion < 0
-      ? "La duración debe ser un número positivo."
+    return !duracion || duracion < 1 || duracion > 24
+      ? "La duración debe tener de 1hs a 24hs."
       : "";
   };
   

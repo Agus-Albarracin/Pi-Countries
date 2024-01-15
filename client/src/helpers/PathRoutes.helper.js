@@ -4,6 +4,7 @@ const PATHROUTES = {
     HOME: "/home",
     DETAIL: "/detail/:id",
     FORM: "/form",
+    FORMADD: "/formadd",
     ERROR: "*",
 }
 

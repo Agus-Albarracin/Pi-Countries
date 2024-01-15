@@ -1,7 +1,7 @@
 // Importa el componente Form y las bibliotecas necesarias para las pruebas
 import React from 'react';
 import configureStore from 'redux-mock-store';
-import { validateName, validateDificultad, validateDuracion, validateTemporada, validateCountries} from '../src/views/Form/validations'; // Asegúrate de tener la ruta correcta
+import { validateName, validateDificultad, validateDuracion, validateTemporada, validateCountries} from "../src/views/form/validations"
 
 // Crea un store ficticio utilizando redux-mock-store
 const mockStore = configureStore([]);

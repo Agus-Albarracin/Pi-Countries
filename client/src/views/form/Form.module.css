@@ -6,6 +6,24 @@
     margin-top: 5%; /* Modifica según necesites */
 }
 
+.linkDiv{
+    width: 60%;
+    margin-right : 40%;
+    margin-left: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 5%;
+    border-radius: 1em;
+    border: 0.3vw solid rgb(5, 5, 5); /* Usé vw para el borde */
+    background-color: rgb(108, 108, 108);
+    color: black;
+    padding: 4px;
+    box-sizing: border-box;
+    max-height: 5vh; /* Usé vh para la altura */
+    transition: background-color 0.2s ease-out 0.2s;
+}
+
 .form {
     width: 90%; /* Cambié a porcentaje */
     max-width: 400px; /* Agregué un máximo */

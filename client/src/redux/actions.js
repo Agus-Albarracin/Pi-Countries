@@ -12,6 +12,8 @@ import {
     SORT_COUNTRIES_BY_NAME_DESCENDING,
     SORT_COUNTRIES_BY_POPULATION_ASCENDING,
     SORT_COUNTRIES_BY_POPULATION_DESCENDING,
+
+    GET_ACTIVITIES,
 } from './actionTypes';
 
 
@@ -46,6 +48,20 @@ export const getCountries = () => {
 
 //     }
 // }
+
+export const getActivities = () => {
+    return async (dispatch) => {
+      try {
+        const { data } = await axios.get("http://localhost:3001/activities");
+        dispatch({
+          type: GET_ACTIVITIES,
+          payload: data
+        });
+      } catch (error) {
+        console.error("Error al obtener las actividades:", error);
+      }
+    }
+  };
 
 //* SEARCH QUE FUNCIONA.
 // export const searchCountries = (name) => {

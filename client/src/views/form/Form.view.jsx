@@ -1,11 +1,11 @@
 // React
-import { useState } from "react";
+import { useState, useEffect} from "react";
 // Axios 
 import axios from "axios";
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // Router
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 
 // Helpers
 import PATHROUTES from "../../helpers/PathRoutes.helper";
@@ -18,15 +18,35 @@ import {
 } from './validations'; // Asegúrate de tener la ruta correcta
 
 // Components
-import Filter from "../../components/Filters/Filter";
+import Filters from "../../components/Filters/Filter";
+
+// Actions 
+import { getCountries, resetCountries } from "../../redux/actions"
+
 // Styles
 import styles from './Form.module.css';
 
 
 
 const Form = () => {
+  // const dispatch = useDispatch()
+  // dispatch(resetCountries())
+  
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const countryNames = useSelector((state) => {
+    return state.countries.map((country) => country.name)
+  },[]);
+
+  useEffect(() => {
+    // Aquí puedes despachar la acción GET_COUNTRIES para obtener los datos iniciales
+    dispatch(getCountries());
+    dispatch(resetCountries());
+  }, [dispatch]);
+
+
   const [values, setValues] = useState({
+  
     name: "",
     dificultad: "",
     duracion: "",
@@ -34,14 +54,17 @@ const Form = () => {
     countries: [],
   });
 
-  const countryNames = useSelector((state) => state.countries.map((country) => country.name));
+  
+  
 
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
-  };
+    const handleChange = (event) => {
+      setValues({
+        ...values,
+        [event.target.name]: event.target.value,
+      });
+    };
+
+
 
   const handleSelectChange = (event) => {
     const selectedCountries = Array.from(
@@ -54,6 +77,8 @@ const Form = () => {
     });
   };
 
+
+//*MANEJO DE ERRORES
   const [errors, setErrors] = useState({
     name: "",
     dificultad: "",
@@ -63,8 +88,8 @@ const Form = () => {
     country: "",
   });
 
-    const handleSubmit = async (event) => {
-      console.log(values);
+//*SUBMIT
+  const handleSubmit = async (event) => {
       event.preventDefault();
     
       const newErrors = { 
@@ -75,28 +100,26 @@ const Form = () => {
         continent: validateCountries(values.countries),
         country: validateCountries(values.countries),
       };
-    
+      
       setErrors(newErrors);
-    
+      
       const formValid = Object.values(newErrors).every(error => !error);
-    
+      
       if (!formValid) {
         return;
       }
 
     try {
-      const response = await axios.post(
-        'http://localhost:3001/activities',
-        values
-      )
-      const successfulMessage = `Se ha creado la nueva actividad turística: ${values.name}`;
-      alert(successfulMessage);
-      setValues({
-        name: "",
-        dificultad: "",
-        duracion: "",
-        temporada: "",
-        countries: []
+      const response = await axios.post('http://localhost:3001/activities', values)
+        const successfulMessage = `Se ha creado la nueva actividad turística: ${values.name}`;
+        console.log(values)
+        alert(successfulMessage);
+        setValues({
+          name: "",
+          dificultad: "",
+          duracion: "",
+          temporada: "",
+          countries: []
       });
       navigate(PATHROUTES.HOME)
       
@@ -105,16 +128,26 @@ const Form = () => {
       else console.error(error);
     }
   };
-
+  
   const handleFilterChange = (continent) => {
     // Hacer algo con el cambio de continente, por ejemplo, actualizar el estado
     // o realizar cualquier acción necesaria en el componente Form
     console.log(`Cambió el continente a: ${continent}`);
   };
 
+
+
+
   return (
     <div className={styles.formDiv}>
+    <Link to="/formadd" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
+  
+      <button type="submit">
+        Agregar país a una actividad
+      </button>
+    </Link>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h1>Crear actividad</h1>
         <label className={styles.label}>
           Nombre: <input className={styles.input} type="text" name="name" value={values.name} onChange={handleChange} placeholder="Ingresa nombre de la actividad" />
           {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
@@ -139,7 +172,7 @@ const Form = () => {
           {errors.temporada && <p className={styles.errorMessage}>{errors.temporada}</p>}
 
         Continente:
-        <Filter onChange={handleFilterChange} className={styles.selectForm}/>
+        <Filters onChange={handleFilterChange} className={styles.selectForm}/>
         <label className={styles.label}>
         {errors.continent && <p className={styles.errorMessage}>{errors.continent}</p>}
 

@@ -11,7 +11,9 @@ import {
     SORT_COUNTRIES_BY_NAME_ASCENDING,
     SORT_COUNTRIES_BY_NAME_DESCENDING,
     SORT_COUNTRIES_BY_POPULATION_ASCENDING,
-    SORT_COUNTRIES_BY_POPULATION_DESCENDING
+    SORT_COUNTRIES_BY_POPULATION_DESCENDING,
+
+    GET_ACTIVITIES,
 } from './actionTypes';
 
 
@@ -19,6 +21,8 @@ const initialState= {
     countries: [],
     allCountries: [],
     currentPage: 1,
+    activities: [],  // Nuevo estado para actividades
+    allActivities: [],  // Nuevo estado para todas las actividades
 };
 
 
@@ -29,7 +33,8 @@ const rootReducer = ( state = initialState, {type, payload}) => {
             return {
                 ...state,
                 allCountries: payload,
-                countries: payload
+                countries: payload,
+             
             }
             //* SEARCH QUE FUNCIONA
         // case SEARCH_COUNTRIES:
@@ -37,7 +42,14 @@ const rootReducer = ( state = initialState, {type, payload}) => {
         //         ...state,
         //         countries: payload
         //     }
-            case SEARCH_COUNTRIES:
+        case GET_ACTIVITIES:  // Nueva acción para obtener actividades
+        return {
+          ...state,
+          allActivities: payload,
+          activities: payload,
+        };
+  
+    case SEARCH_COUNTRIES:
     return {
         ...state,
         countries: payload,
@@ -58,7 +70,7 @@ const rootReducer = ( state = initialState, {type, payload}) => {
         case RESET_ACTIVITIES:
                 return {
                     ...state,
-                    activities: state.allActivities
+                    countries: state.allCountries
                 }
 
         case DELETE_ACTIVITY:
@@ -108,6 +120,7 @@ const rootReducer = ( state = initialState, {type, payload}) => {
         default:
             return {...state}
     }
+
 }
 
 export default rootReducer;

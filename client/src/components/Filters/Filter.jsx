@@ -7,14 +7,14 @@ import styles from './Filter.module.css'
 
 const Filter = () => {
     const dispatch = useDispatch();
+
     const handleChange = (event) => {
-        const continent = event.target.value;
+    const continent = event.target.value;
         if (continent === "all") {
             dispatch (resetCountries());
             dispatch(resetActivities());
         } else {
             dispatch(filterCountriesByContinent(continent));
-
         }
     };
     return (

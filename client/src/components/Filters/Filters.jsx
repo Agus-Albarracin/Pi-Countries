@@ -90,7 +90,7 @@ const Filters = ({ selectedActivity, setSelectedActivity }) =>{
         continent === "Europe" ||
         continent === "Oceania" ||
         continent === "Antarctic"
-        ) {
+        ) { 
             dispatch (resetCountries());
             dispatch(resetActivities());
                 //deberia renderizar visualmente el valor.
@@ -98,7 +98,6 @@ const Filters = ({ selectedActivity, setSelectedActivity }) =>{
                 // selectTeam.value = "All";
                 const selectAll = document.getElementById("selectActivityFilter")
                 selectAll.value = "all"
-                console.log(selectAll.value)
             dispatch(filterCountriesByContinent(continent))
 
         } else {
@@ -111,7 +110,7 @@ const Filters = ({ selectedActivity, setSelectedActivity }) =>{
     const handleActivityChange = (event) => {
 
             const activity = event.target.value; 
-            console.log(activity)
+        
             setSelectedActivity(activity);
 
             if (activity === "allfilter" || activity !== "allfilter") { 
