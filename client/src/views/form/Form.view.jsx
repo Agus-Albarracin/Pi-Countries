@@ -140,12 +140,7 @@ const Form = () => {
 
   return (
     <div className={styles.formDiv}>
-    <Link to="/formadd" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
-  
-      <button type="submit">
-        Agregar país a una actividad
-      </button>
-    </Link>
+
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Crear actividad</h1>
         <label className={styles.label}>
@@ -187,6 +182,13 @@ const Form = () => {
         </label>
         <button type="submit" className={styles.btn}>Crear actividad turística</button>
       </form>
+
+      <Link to="/formadd" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
+  
+  <button type="submit">
+    Agregar país a una actividad
+  </button>
+</Link>
     </div>
   )
 }

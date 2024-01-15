@@ -27,3 +27,15 @@ export const validateName = (name) => {
       ? "Selecciona al menos un continente y un país."
       : "";
   };
+
+  export const validateCountries2 = (countries) => {
+    return !countries || countries.length === 0
+      ? "Selecciona al menos un país."
+      : "";
+  };
+
+  export const validateContinent = (countries) => {
+    return !countries || countries.length === 0
+      ? "Selecciona al menos un continente."
+      : "";
+  };

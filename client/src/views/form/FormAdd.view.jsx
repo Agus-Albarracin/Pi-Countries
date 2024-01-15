@@ -7,7 +7,7 @@ import { getCountries, resetCountries, getActivities } from "../../redux/actions
 import Filters from "../../components/Filters/Filter";
 import PATHROUTES from "../../helpers/PathRoutes.helper";
 
-import { validateDificultad, validateDuracion, validateTemporada, validateCountries } from "./validations";
+import {validateCountries, validateCountries2, validateContinent } from "./validations";
 import styles from "./Form.module.css";
 
 
@@ -36,7 +36,11 @@ const FormAdd = () => {
     selectedActivity: "",
   });
 
- 
+  const handleContinentChange = (continent) => {
+    setValues({ ...values, continent });
+    setErrors((prevErrors) => ({ ...prevErrors }));
+  };
+
 
   const handleSelectCountryChange = (event) => {
     const selectedCountries = Array.from(
@@ -74,7 +78,7 @@ const handleSubmit = async (event) => {
     event.preventDefault();
 
     setErrors({
-        continent: validateTemporada(values.continent),
+        continent: validateContinent(values.continent),
         countries: validateCountries(values.countries),
         selectedActivity: values.selectedActivity.length > 0 ? "" : "Seleccione al menos una actividad",
       });
@@ -128,9 +132,7 @@ try {
 
   return (
     <div className={styles.formDiv}>
-    <Link to="/form" className={styles.linkDiv}
-    style={{ textDecoration: 'none', color: 'inherit' }}>
-         <button type="submit">Volver </button> </Link>
+
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Añade un país a la actividad</h1>
 
@@ -139,17 +141,10 @@ try {
             Seleccionar Continente:
             <Filters
               className={styles.selectForm}
-              onChange={(continent) => {
-                setValues({ ...values, continent: continent });
-                setErrors({
-                  ...errors,
-                  continent: validateTemporada(continent),
-                });
-              }}
+              onChange={handleContinentChange}
             />
-            <span className={styles.errorMessage}>{errors.continent}</span>
           </label>
-        </section> <br /> 
+        </section> 
         
         <section>
           <label className={styles.label}>
@@ -185,6 +180,9 @@ try {
         </section>
 
       </form>
+      <Link to="/form" className={styles.linkDiv}
+    style={{ textDecoration: 'none', color: 'inherit' }}>
+         <button type="submit">Volver </button> </Link>
     </div>
   );
 };

@@ -98,6 +98,8 @@ const Filters = ({ selectedActivity, setSelectedActivity }) =>{
                 // selectTeam.value = "All";
                 const selectAll = document.getElementById("selectActivityFilter")
                 selectAll.value = "all"
+                const selectSortAll = document.getElementById("selectSortFilter")
+                selectSortAll.value = "unsorted"
             dispatch(filterCountriesByContinent(continent))
 
         } else {
@@ -142,7 +144,8 @@ return (
         </div>
         <div name="BoxFilterContinent" className={styles.BoxFilterContinent}>
             <select onChange={handleContinentChange} id="selectContinentFilter" className={styles.select}>
-                <option value="all">Seleccione los continentes</option>
+                <option value="default">Seleccione los continentes</option>
+                <option value="all">Todos los continentes</option>
                 <option value="Africa">Africa</option>
                 <option value="Americas">America</option>
                 <option value="Asia">Asia</option>
