@@ -21,6 +21,8 @@ const Home = () => {
     const indexUltimaCarta = currentPage*cardsPorPagina;
     const indexPrimerCarta = indexUltimaCarta - cardsPorPagina;
     const currentCards = countries.slice(indexPrimerCarta, indexUltimaCarta);
+    const totalPaginas = Math.ceil(countries.length / cardsPorPagina);
+
    
     //funciones de los botones de paginado.
     const primerPagina = () => dispatch(setCurrentPage(1));
@@ -51,6 +53,7 @@ const Home = () => {
             <div className={styles.paginado}>
                 <button onClick={primerPagina} disabled={currentPage===1} className={styles.btn}>Primer página</button>
                 <button onClick={anteriorPagina} disabled={currentPage===1} className={styles.btn}>Página Anterior</button>
+                <span className={styles.btnSpan}>Página {currentPage} de {totalPaginas}</span>
                 <button onClick={siguientePagina} disabled={indexUltimaCarta >= countries.length} className={styles.btn}>Página siguiente</button>
                 <button onClick={ultimaPagina}  disabled={currentPage === Math.ceil(countries.length / cardsPorPagina)} className={styles.btn}>Última página</button>
             </div>

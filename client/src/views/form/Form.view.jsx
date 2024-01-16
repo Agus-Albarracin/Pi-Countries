@@ -124,7 +124,11 @@ const Form = () => {
       navigate(PATHROUTES.HOME)
       
     } catch (error) {
-      if (error.response && error.response.data) alert('Ya existe una actividad con ese nombre.');
+      if (error.response && error.response.data) {
+
+        alert('Ya existe una actividad con ese nombre.');
+        window.location.reload();
+      }
       else console.error(error);
     }
   };

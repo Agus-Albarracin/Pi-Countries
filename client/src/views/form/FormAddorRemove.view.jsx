@@ -109,17 +109,25 @@ const handleSubmit = async (event) => {
       console.log(activityId)
 
       // Crear el objeto a enviar en la solicitud PUT
-      const agregarPais = {
+      const addOrRemovePais = {
         activityName: selectedActivity,
         countries: values.countries,
         action: action,
       };
-      console.log(agregarPais)
+      console.log(addOrRemovePais)
 
-      if(agregarPais.action === "add"){
+      if(addOrRemovePais.action === "add"){
+
+        const confirmAdd = window.confirm("¿Estás seguro que deseas agregar el/los países?");
+
+        if (!confirmAdd) {
+          // Si el usuario elige "Cancelar" en la alerta, no hagas nada
+          return;
+        }
+
         try{
 
-        await axios.put(`http://localhost:3001/activities`, agregarPais);
+        await axios.put(`http://localhost:3001/activities`, addOrRemovePais);
         // Limpiar el formulario y mostrar un mensaje de éxito
         setValues({
           selectedActivity: [],
@@ -131,22 +139,37 @@ const handleSubmit = async (event) => {
         navigate(PATHROUTES.HOME)
   
       } catch (error) {
-        console.error(error);
-      }
-  
+        if(error.response){
+          const {status, data} = error.response;
+          if(status === 404){
+            console.log("ya existe")
+            alert("El país ya existe en la actividad")
+            window.location.reload();
+          } 
+        } else {
 
-      } else if (agregarPais.action === "remove"){
+          console.error(error);
+        }
+      }
+  //*REMOVE
+
+    } else if (addOrRemovePais.action === "remove"){
 
         const confirmDelete = window.confirm("¿Estás seguro que deseas eliminar el/los países?");
-
+      
         if (!confirmDelete) {
-          // Si el usuario elige "Cancelar" en la alerta, no hagas nada
-          return;
+        // Si el usuario elige "Cancelar" en la alerta, no hagas nada
+        return;
         }
+    
 
         try{
+ 
   
-        await axios.put(`http://localhost:3001/activities`, agregarPais);
+       await axios.put(`http://localhost:3001/activities`, addOrRemovePais);
+            // Obtener la actividad actualizada después de realizar la acción
+
+
         // Limpiar el formulario y mostrar un mensaje de éxito
         setValues({
           selectedActivity: [],
@@ -157,15 +180,23 @@ const handleSubmit = async (event) => {
   
         navigate(PATHROUTES.HOME)
   
-      } catch (error) {
-        console.error(error);
-      }
+        } catch (error) {
+          if(error.response){
+            const {status, data} = error.response;
+            if(status === 404){
+              console.log("No existe en la actividad")
+              alert("El país NO existe en la actividad, por lo tanto no se puede eliminar")
+              window.location.reload();
+            } } else {
 
-      }
+              
+              console.error(error);
+            }
+        
+        }
 
-
-    
-  };
+    }
+ };
 
 
 
@@ -175,7 +206,7 @@ const handleSubmit = async (event) => {
     style={{ textDecoration: 'none', color: 'inherit' }}>
          <button type="submit" className={styles.btnLink}>Volver </button> </Link>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <h1>Añade un país a la actividad</h1>
+        <h1>Añade o Elimina <br /> un país a la actividad</h1>
 
         <section>
           <label className={styles.label}>

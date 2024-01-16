@@ -15,6 +15,23 @@ const manageActivityCountries = async (req, res) => {
 
     //* ACTION ADD
     if (action === 'add') {
+    // Obtener los países existentes en la actividad
+  const existingCountries = await activity.getCountries();
+
+  // Filtrar los países que ya existen
+  const duplicateCountries = countries.filter((country) =>
+    existingCountries.some((existingCountry) => existingCountry.name === country)
+  );
+
+  // Si hay países duplicados, lanzar un error
+  if (duplicateCountries.length > 0) {
+    return res.status(404).json({
+      message: 'Uno o más países ya existen en la actividad',
+      duplicateCountries: duplicateCountries,
+    });
+  }
+
+
       // Agregar los países a la actividad
       const selectedCountries = await Country.findAll({
         where: { name: countries }
@@ -28,6 +45,21 @@ const manageActivityCountries = async (req, res) => {
 
     //* ACTION REMOVE
     } else if (action === 'remove') {
+            // Obtener los países existentes en la actividad
+  const existingCountries = await activity.getCountries();
+
+  // Filtrar los países que ya existen
+  const duplicateCountries = countries.filter((country) =>
+    existingCountries.some((existingCountry) => existingCountry.name === country)
+  );
+
+  // Si hay países duplicados, lanzar un error
+  if (!duplicateCountries.length > 0) {
+    return res.status(404).json({
+      message: 'Uno o más países ya NO existen en la actividad',
+      duplicateCountries: duplicateCountries,
+    });
+  }
       // Buscar el país que coincide con el nombre proporcionado
       const countryToRemove = await Country.findAll({
         where: { name: countries }
