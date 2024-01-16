@@ -11,7 +11,8 @@ import Detail from './views/detail/Detail.view'
 import Form from './views/form/Form.view'
 import Error from './views/Error/Error.view'
 import SingUp from './views/singUp/SingUp.view'
-import FormAdd from './views/form/FormAdd.view'
+import FormAddorRemove from './views/form/FormAddorRemove.view'
+import FormRemoveActivity from './views/form/Form.removeActivity.view'
 // Component
 import NavBar from './components/NavBar/NavBar'
 
@@ -32,7 +33,8 @@ function App() {
         <Route path={PATHROUTES.HOME} element={<Home />} />
         <Route path={PATHROUTES.DETAIL} element={<Detail />} />
         <Route path={PATHROUTES.FORM} element={<Form />} />
-        <Route path={PATHROUTES.FORMADD} element={<FormAdd />} />s
+        <Route path={PATHROUTES.FORMADDORREMOVE} element={<FormAddorRemove />} />
+        <Route path={PATHROUTES.FORMREMOVEACTIVITY} element={<FormRemoveActivity />} />
         <Route path={PATHROUTES.ERROR} element={<Error />} />
       </Routes>
     </div>

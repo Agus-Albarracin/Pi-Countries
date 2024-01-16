@@ -11,7 +11,7 @@ import {validateCountries, validateCountries2, validateContinent } from "./valid
 import styles from "./Form.module.css";
 
 
-const FormAdd = () => {
+const FormAddorRemove = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -77,7 +77,12 @@ const FormAdd = () => {
 const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setErrors({
+    const buttonAction = document.activeElement;
+    console.log(buttonAction)
+    const action = buttonAction.getAttribute('action');
+
+
+      setErrors({
         continent: validateContinent(values.continent),
         countries: validateCountries(values.countries),
         selectedActivity: values.selectedActivity.length > 0 ? "" : "Seleccione al menos una actividad",
@@ -89,8 +94,6 @@ const handleSubmit = async (event) => {
       }
 
 
-
-try {
 
       // Obtener el nombre de la actividad seleccionada
       const selectedActivity = values.selectedActivity[0];
@@ -109,23 +112,59 @@ try {
       const agregarPais = {
         activityName: selectedActivity,
         countries: values.countries,
+        action: action,
       };
+      console.log(agregarPais)
 
-      await axios.put(`http://localhost:3001/activities`, agregarPais);
+      if(agregarPais.action === "add"){
+        try{
 
-      // Limpiar el formulario y mostrar un mensaje de éxito
-      setValues({
-        selectedActivity: [],
-        countries: [],
-      });
+        await axios.put(`http://localhost:3001/activities`, agregarPais);
+        // Limpiar el formulario y mostrar un mensaje de éxito
+        setValues({
+          selectedActivity: [],
+          countries: [],
+        });
+  
+        alert("País agregado a la actividad exitosamente");
+  
+        navigate(PATHROUTES.HOME)
+  
+      } catch (error) {
+        console.error(error);
+      }
+  
 
-      alert("País agregado a la actividad exitosamente");
+      } else if (agregarPais.action === "remove"){
 
-      navigate(PATHROUTES.HOME)
+        const confirmDelete = window.confirm("¿Estás seguro que deseas eliminar el/los países?");
 
-    } catch (error) {
-      console.error(error);
-    }
+        if (!confirmDelete) {
+          // Si el usuario elige "Cancelar" en la alerta, no hagas nada
+          return;
+        }
+
+        try{
+  
+        await axios.put(`http://localhost:3001/activities`, agregarPais);
+        // Limpiar el formulario y mostrar un mensaje de éxito
+        setValues({
+          selectedActivity: [],
+          countries: [],
+        });
+  
+        alert("País eliminado de la actividad exitosamente");
+  
+        navigate(PATHROUTES.HOME)
+  
+      } catch (error) {
+        console.error(error);
+      }
+
+      }
+
+
+    
   };
 
 
@@ -134,7 +173,7 @@ try {
     <div className={styles.formDiv}>
     <Link to="/form" className={styles.linkDiv}
     style={{ textDecoration: 'none', color: 'inherit' }}>
-         <button type="submit">Volver </button> </Link>
+         <button type="submit" className={styles.btnLink}>Volver </button> </Link>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Añade un país a la actividad</h1>
 
@@ -176,8 +215,11 @@ try {
         </label>
 
         <section>  <br />
-        <button type="submit" className={styles.btn}>
+        <button type="submit" action="add" className={styles.btnAdd}>
             Agregar país a la actividad
+        </button>
+        <button type="submit" action="remove" className={styles.btnDelete}>
+            Eliminar país de la actividad
         </button>
         </section>
 
@@ -186,4 +228,4 @@ try {
   );
 };
 
-export default FormAdd;
+export default FormAddorRemove;

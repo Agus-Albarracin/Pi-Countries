@@ -3,6 +3,9 @@ const { Router } = require("express");
 const getActivities = require('../controllers/activities/getActivities')
 const postActivities = require('../controllers/activities/postActivities')
 const putActivities = require('../controllers/activities/putActivities');
+// prueba del nuevo put
+const addremoveActivities = require("../controllers/activities/putAddputRemoveActivities")
+const deleteActivities = require("../controllers/activities/deleteActivities")
 
 // Countries
 const getCountries = require('../controllers/countries/getCountries')
@@ -23,7 +26,8 @@ router.get('/country', getCountryByName)
 
 router.get('/activities', getActivities)
 router.post('/activities', postActivities)
-router.put('/activities', putActivities);
+router.put("/activities", addremoveActivities)
+router.delete("/activities", deleteActivities)
 
 
 router.post("/login", logInUser)

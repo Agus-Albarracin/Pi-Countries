@@ -4,24 +4,28 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-top: 5%; /* Modifica según necesites */
+    margin-left: -5%;
 }
 
 .linkDiv{
-    width: 60%;
-    margin-right : 40%;
-    margin-left: 40%;
+    width: 100%;
+    width: 300px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    margin-bottom: 5%;
+}
+
+.btnLink,
+.btnDelete,
+.btnAdd{
+    width: 98%;
+    padding: 2%;
     border-radius: 1em;
     border: 0.3vw solid rgb(5, 5, 5); /* Usé vw para el borde */
-    background-color: rgb(108, 108, 108);
+    background-color: white;
     color: black;
-    padding: 4px;
     box-sizing: border-box;
-    max-height: 5vh; /* Usé vh para la altura */
-    transition: background-color 0.2s ease-out 0.2s;
+    margin: 4px;
 }
 
 .form {
@@ -57,19 +61,31 @@
     background-color: white;
     color: black;
     box-sizing: border-box;
+    margin: 3px;
 }
 
 .select {
     max-width: 50%; /* Modifica según necesites */
 }
 
-.btn {
+.btn,
+.btnLink {
     max-height: 5vh; /* Usé vh para la altura */
     transition: background-color 0.2s ease-out 0.2s;
 }
 
-.btn:hover {
+.btn:hover,
+.btnLink:hover{
     background-color: rgb(194, 142, 32);
+    color: black;
+}
+.btnDelete:hover{
+    background-color:red;
+    color: black;
+}
+
+.btnAdd:hover{
+    background-color:green;
     color: black;
 }
 
