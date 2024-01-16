@@ -14,6 +14,7 @@ import {
     SORT_COUNTRIES_BY_POPULATION_DESCENDING,
 
     GET_ACTIVITIES,
+    FILTER_EXTRA_ACTIVITYFORCONTINENT
 } from './actionTypes';
 
 
@@ -174,6 +175,25 @@ export const filterCountriesByContinent = (continent) => {
     }
 }
 
+// En tus actions.js
+export const filterExtra = (continent, activity) => {
+    return (dispatch, getState) => {
+      const allCountries = getState().allCountries;
+  
+      // Filtrar los países que pertenecen al continente y cumplen con la actividad
+      const filteredCountries = allCountries.filter(country =>
+        country.continente.toLowerCase() === continent.toLowerCase() &&
+        country.Activities.some(act =>
+          act.name.toLowerCase() === activity.toLowerCase()
+        )
+      );
+  
+      dispatch({
+        type: FILTER_EXTRA_ACTIVITYFORCONTINENT,
+        payload: filteredCountries,
+      });
+    };
+  };
 
 export const filterCountriesByActivity = (activity) => {
     return (dispatch, getState) => {

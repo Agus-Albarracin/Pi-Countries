@@ -14,6 +14,7 @@ import {
     SORT_COUNTRIES_BY_POPULATION_DESCENDING,
 
     GET_ACTIVITIES,
+    FILTER_EXTRA_ACTIVITYFORCONTINENT
 } from './actionTypes';
 
 
@@ -86,7 +87,11 @@ const rootReducer = ( state = initialState, {type, payload}) => {
 
 
 
-
+        case FILTER_EXTRA_ACTIVITYFORCONTINENT:
+            return {
+                ...state,
+                countries: payload
+            }
         case FILTER_COUNTRIES_BY_CONTINENT:
             return {
                 ...state,

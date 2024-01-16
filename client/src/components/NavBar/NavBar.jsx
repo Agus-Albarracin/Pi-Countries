@@ -1,5 +1,5 @@
 // Routing
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 // Components
 import SearchBar from '../SearchBar/SearchBar';
 // Helpers
@@ -9,12 +9,28 @@ import styles from './NavBar.module.css'
 
 
 const NavBar = () => {
+
+const navigate = useNavigate();
+
+
+  const handleLogout = () => {
+    // Limpiar la sesión u otros pasos de cierre de sesión aquí
+
+    // Navegar a la página de inicio
+    navigate(PATHROUTES.LANDING, { replace: true });
+  };
+
+
     return (
         <div className={styles.navMain}>
+          <button onClick={handleLogout} className={styles.logout} style={{ backgroundColor: 'transparent', border: "none" }}>
+            <h1>Cerrar Sesión</h1>
+          </button>
             <div className={styles.links}>
-                <Link to={PATHROUTES.LANDING} className={styles.title}>
-                    <h1>Countries APP</h1>
-                </Link>
+                {/* <Link to={PATHROUTES.LANDING} className={styles.title}>
+                    <h1>Cerrar Sesión</h1>
+                </Link> */}
+
                 <Link to={PATHROUTES.HOME} className={styles.title}>
                     <h1>Home</h1>
                 </Link>

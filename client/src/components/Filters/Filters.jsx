@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { resetCountries,
      filterCountriesByActivity,
      filterCountriesByContinent,
-     resetActivities } from "../../redux/actions";
+     resetActivities,
+     filterExtra} from "../../redux/actions";
 //sort
 import {
         sortCountriesByNameAscending,
@@ -75,7 +76,9 @@ const Filters = ({ selectedActivity, setSelectedActivity }) =>{
 
             const selectAllContinentFilter = document.getElementById("selectContinentFilter")
             selectAllContinentFilter.value = "all"      
-            
+
+            const selectDefaultExtra= document.getElementById("selectFilterExtra")
+            selectDefaultExtra.value = "default" 
 
         }
     }
@@ -100,6 +103,9 @@ const Filters = ({ selectedActivity, setSelectedActivity }) =>{
                 selectAll.value = "all"
                 const selectSortAll = document.getElementById("selectSortFilter")
                 selectSortAll.value = "unsorted"
+                const selectDefaultExtra= document.getElementById("selectFilterExtra")
+                selectDefaultExtra.value = "default" 
+    
             dispatch(filterCountriesByContinent(continent))
 
         } else {
@@ -123,12 +129,27 @@ const Filters = ({ selectedActivity, setSelectedActivity }) =>{
 
             const selectUnsorted = document.getElementById("selectSortFilter")
                 selectUnsorted.value = "unsorted"
+
+            const selectDefaultExtra= document.getElementById("selectFilterExtra")
+                selectDefaultExtra.value = "default" 
+    
                 dispatch(filterCountriesByActivity(activity));
             }
             else { dispatch(filterCountriesByActivity(activity));}
 
    };
 
+   const handleExtraChange = (event) => {
+    const continent = event.target.value;
+  
+    if (continent === "Africa" || continent === "Americas" || continent === "Asia" || continent === "Europe" || continent === "Oceania" || continent === "Antarctic") {
+      dispatch(resetActivities());
+      dispatch(filterExtra(continent, selectedActivity)); // Agrega la actividad seleccionada
+    } else if(continent === "all" ){
+      dispatch(resetCountries());
+      dispatch(filterCountriesByContinent(continent));
+    }
+  };
 
 return (
 <div name="BoxAllFilters" className={styles.BoxAllFilters}>
@@ -136,6 +157,7 @@ return (
         <div name="BoxFilterSort" className={styles.BoxFilterSort}>
         <select onChange={handleSortChange} id="selectSortFilter" className={styles.select}>
             <option value="unsorted">Ordenar por...</option>
+            <option value="unsorted">Todos los países de</option>
             <option value="name-ascending">Nombre ↑</option>
             <option value="name-descending">Nombre ↓</option>
             <option value="population-ascending">Poblacion ↑</option>
@@ -162,6 +184,18 @@ return (
                         <option key={activity} value={activity}>{activity}</option>
                         ))}
                 </select>
+        </div>
+        <div name="BoxFilterExtra" className={styles.BoxFilterExtra}>
+            <select onChange={handleExtraChange} id="selectFilterExtra" className={styles.select}>
+                <option value="default">Continentes de las actividades</option>
+                <option value="all">Todos los continentes</option>
+                <option value="Africa">Africa</option>
+                <option value="Americas">America</option>
+                <option value="Asia">Asia</option>
+                <option value="Europe">Europa</option>
+                <option value="Oceania">Oceania</option>
+                <option value="Antarctic">Antartida</option>
+            </select>
         </div>
 </div>
         );

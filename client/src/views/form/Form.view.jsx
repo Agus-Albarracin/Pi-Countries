@@ -153,6 +153,10 @@ const Form = () => {
       <Link to="/formRemoveActivity" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
       <button type="submit" className={styles.btnLink}> Eliminar Actividad </button>
       </Link>
+      <Link to="/home" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
+      <button type="submit" className={styles.btnLink}> Volver al home </button>
+      </Link>
+
 
       </div>
 

@@ -23,6 +23,15 @@ const LogInComponent = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  window.addEventListener('popstate', (event) => {
+   window.alert("Por motivos de seguridad bloqueamos la página \nCierre la pestaña y vuelva a abrirla")
+   window.location.reload()
+   navigate("/")
+    
+    // Puedes realizar acciones específicas según el nuevo estado del historial
+    // Por ejemplo, podrías redirigir o actualizar la página según tus necesidades
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
