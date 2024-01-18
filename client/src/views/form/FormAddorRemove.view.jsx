@@ -178,7 +178,7 @@ const handleSubmit = async (event) => {
   
         alert("País eliminado de la actividad exitosamente");
   
-        navigate(PATHROUTES.HOME)
+        navigate(PATHROUTES.FORM)
   
         } catch (error) {
           if(error.response){

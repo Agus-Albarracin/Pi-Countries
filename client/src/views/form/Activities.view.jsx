@@ -51,6 +51,9 @@ const ActivitiesViews = () => {
           );
         })}
 
+    <Link to="/form" className={styles.linkDiv}
+    style={{ textDecoration: 'none', color: 'inherit' }}>
+    <button type="submit" className={styles.btnLink}>Volver </button> </Link>
       </div>
     
     );

@@ -10,9 +10,6 @@ import { useNavigate, Link} from "react-router-dom";
 // Helpers
 import PATHROUTES from "../../helpers/PathRoutes.helper";
 
-// Components
-import Filters from "../../components/Filters/Filter";
-
 // Actions 
 import { getCountries, resetCountries, getActivities} from "../../redux/actions"
 
@@ -62,21 +59,13 @@ const UpdateActivities = () => {
         });
       };
     
-      const handleSelectChange = (event) => {
-        const selectedCountries = Array.from(
-          event.target.selectedOptions,
-          (option) => option.value
-        );
-        setValues({
-          ...values,
-          countries: selectedCountries,
-        });
-      };
+ 
     
       const handleSubmit = async (event) => {
         event.preventDefault();
-      
-        // Copia el estado actual de la actividad
+
+        
+        //* Copia el estado actual de la actividad
         const updatedActivity = { ...activityData };
 
       
@@ -87,6 +76,13 @@ const UpdateActivities = () => {
           }
         });
         console.log(updatedActivity)
+
+        const confirmUpdated = window.confirm("¿Estás seguro que deseas modificar los datos de la actividad?");
+      
+        if (!confirmUpdated) {
+        // Si el usuario elige "Cancelar" en la alerta, no hagas nada
+        return;
+        }
         try {
           // Cambia el método a put o patch y ajusta la URL según la lógica de tu servidor
           await axios.put("http://localhost:3001/updateactivities", updatedActivity);
@@ -101,7 +97,7 @@ const UpdateActivities = () => {
             temporada: "",
             countries: [],
           });
-          navigate(PATHROUTES.HOME);
+          navigate(PATHROUTES.FORM);
         } catch (error) {
           if (error.response && error.response.data) {
             alert(`Error: ${error.response.data.message}`);
@@ -151,11 +147,12 @@ const UpdateActivities = () => {
         </label>
 
           <label className={styles.label}>
-            Nuevo nombre:
+            Nuevo nombre: (Por favor escribe solo letras...)
             <input
               className={styles.input}
               type="text"
               name="name"
+              pattern="[A-Za-z]+"
               value={values.name}
               onChange={handleChange}
               placeholder="Ingresa el nuevo nombre de la actividad"
@@ -171,7 +168,7 @@ const UpdateActivities = () => {
               name="dificultad"
               value={values.dificultad}
               onChange={handleChange}
-              placeholder="Ingresa la dificultad"
+              placeholder="SI DESEA MODIFICAR ingresa la dificultad"
             />
           </label>
           <label className={styles.label}>
@@ -179,14 +176,15 @@ const UpdateActivities = () => {
             <input
               className={styles.input}
               type="number"
-              min="0"
+              min="1"
+              max="48"
               name="duracion"
               value={values.duracion}
               onChange={handleChange}
-              placeholder="Ingresa la duración"
+              placeholder="SI DESEA MODIFICAR ingresa la duración"
             />
           </label>
-          Temporada:
+          Temporada:  (Solo si desea modificar)
           <select
             className={styles.select}
             name="temporada"
@@ -199,8 +197,8 @@ const UpdateActivities = () => {
             <option value="Invierno">Invierno</option>
             <option value="Primavera">Primavera</option>
           </select>
-  
-          <button type="submit" className={styles.btn}>Modificar actividad turística</button>
+          <br /> <br />
+          <button type="submit" className={styles.btnupdate}>Modificar actividad turística</button>
         </form>
       </div>
     );

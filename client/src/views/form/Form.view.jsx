@@ -121,7 +121,7 @@ const Form = () => {
           temporada: "",
           countries: []
       });
-      navigate(PATHROUTES.HOME)
+      navigate(PATHROUTES.ACTIVITIES)
       
     } catch (error) {
       if (error.response && error.response.data) {
@@ -154,7 +154,7 @@ const Form = () => {
       <button type="submit" className={styles.btnLink}> Modificar actividades </button>
       </Link>
       <Link to="/formaddorremove" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
-      <button type="submit" className={styles.btnLink}> Agregar/Eliminar PAÍS </button>
+      <button type="submit" className={styles.btnLink}> Agregar/Eliminar PAÍS de actividad</button>
       </Link>
       <Link to="/formRemoveActivity" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
       <button type="submit" className={styles.btnLink}> Eliminar Actividad </button>

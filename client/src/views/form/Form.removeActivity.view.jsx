@@ -98,7 +98,7 @@ const handleSubmit = async (event) => {
   
         alert("Se elimino la actividad exitosamente");
   
-        navigate(PATHROUTES.HOME)
+        navigate(PATHROUTES.FORM)
 
   
       } catch (error) {

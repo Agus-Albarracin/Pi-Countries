@@ -53,7 +53,8 @@
 
 .input,
 .select,
-.btn {
+.btn,
+.btnupdate {
     width: 98%;
     padding: 2%;
     border-radius: 1em;
@@ -77,6 +78,10 @@
 .btn:hover,
 .btnLink:hover{
     background-color: rgb(194, 142, 32);
+    color: black;
+}
+.btnupdate:hover{
+    background-color: rgb(2, 213, 255);
     color: black;
 }
 .btnDelete:hover{
