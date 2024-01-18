@@ -1,3 +1,5 @@
+# FRONT.
+
 [LANDING]
 -Se añade base de datos con usuario.
 -Se añade toggle.
@@ -7,6 +9,17 @@
 -Deslogear usuario.
 -Se bloquea al acceso si se quiere backear con el navegador.
 -Se mantiene en la DB el usuario en caso de que la pagina se bloquee.
+
+[NAVBAR]
+-Se renderiza en todas las secciones con éxito.
+-Contiene el SearchBar.
+-Contiene botón de Cerrar Sesion, Home y Actividades.
+
+[SEARCHBAR]
+-Se renderiza exitosamente en todos las secciones.
+-Filtra únicamente por nombre.
+-Filtra en tiempo real.
+-Contiene botón de reseto.
 
 [HOME]
 -Se renderizan los países exactamente.
@@ -41,6 +54,7 @@
 -Se agrega botón para volver al home.
 -El formulario muestra una alerta en caso de que exista la actividad.
 -El formulario envia al home cada vez que se crea con éxito una actividad.
+-Todos los archivos del form contienen boton para volver al inicio de actividades.
 
 *botones de eliminar y añadir*
 -Cada botón contiene un color que diferencia su uso en el hover.
@@ -56,7 +70,16 @@
 -El botón dispara una alerta de seguridad.
 -El botón dispara una alerta de éxito.
 -Puede eliminar varias actividades a la vez.
--Se puede modificar actividad para cambiar el nombre, dificultad, duracion y temporada, lo demas en agregar o eliminar país.
+
+*botón para modificar actividad*
+-La seccion permite modificar solo los datos ingresados y mantener los actuales.
+-La sección completa automaticamente con todos los datos actuales de la actividad.
+-El botón contiene un color que diferencia su uso en el hover.
+-El botón dispara una alerta de seguridad.
+-El botón dispara una alerta de éxito.
+-Se puede modificar actividad para cambiar el nombre, dificultad, duracion y temporada.
+-Las modificaciones de Agregar y Eliminar país se hacen en su respectivo botón.
+-Contiene su botón para volver.
 
 [ACTIVIDADES]
 -Las actividades se renderizan a medida se crean.
@@ -70,8 +93,43 @@
 -Se renderizan correctamente en caso de errores en las rutas.
 -Contiene botón para volver al inicio.
 
+# BACK.
+
+[MODELOS]
+-Los modelos se definieron correctamente.
+-Los modelos muestran sus tablas correspondientes en SQL SHELL Y PGADMIN.
+
+[BD]
+-Se creó con exito las relaciones en la base de datos.
+
+[SERVER]
+-Se ejecuta el servidor correctamente.
+-Se utilizo una funcion para cargar los datos de la api, a los registros de la base de datos.
+-Contiene sistema de correcion, en caso de que no se carguen los datos a la api, el server no funciona.
+-Funciona correctamente.
+
+[CONTROLLERS]
+-Se crearon controladores para todos los modelos por separados.
+-Se utilizaron todos los métodos vistos, get, post, delete y put.
+-Los controladores tiene su respectiva ruta.
+
+[INDEXROUTES]
+-Todas los controllers se importaron con éxito.
+-Todas las rutas funcionan correctamente y cumplen con sus acciones.
+-Cada ruta contiene su controlador funcionando.
 
 
+# TEST Y PUNTOS EXTRAS
+
+*test*
+-Se hicieron por lo menos 1 test de front-end.
+-Se hicieron por lo menos 1 test de back-end.
+-No se realizo test de modelos.
+
+*puntos extra*
+-Se agregaron metodos como delete y put.
+-Se agrgaron más modelos.
+-Se creó una simulación de creación y registro de usuarios.
 
 
 
