@@ -1,3 +1,28 @@
+# BACK.
+
+[MODELOS]
+-Los modelos se definieron correctamente.
+-Los modelos muestran sus tablas correspondientes en SQL SHELL Y PGADMIN.
+
+[BD]
+-Se creó con exito las relaciones en la base de datos.
+
+[SERVER]
+-Se ejecuta el servidor correctamente.
+-Se utilizo una funcion para cargar los datos de la api, a los registros de la base de datos.
+-Contiene sistema de correcion, en caso de que no se carguen los datos a la api, el server no funciona.
+-Funciona correctamente.
+
+[CONTROLLERS]
+-Se crearon controladores para todos los modelos por separados.
+-Se utilizaron todos los métodos vistos, get, post, delete y put.
+-Los controladores tiene su respectiva ruta.
+
+[INDEXROUTES]
+-Todas los controllers se importaron con éxito.
+-Todas las rutas funcionan correctamente y cumplen con sus acciones.
+-Cada ruta contiene su controlador funcionando.
+
 # FRONT.
 *Todo el front es ajustable a responsiv*
 
@@ -93,31 +118,6 @@
 [ERROR]
 -Se renderizan correctamente en caso de errores en las rutas.
 -Contiene botón para volver al inicio.
-
-# BACK.
-
-[MODELOS]
--Los modelos se definieron correctamente.
--Los modelos muestran sus tablas correspondientes en SQL SHELL Y PGADMIN.
-
-[BD]
--Se creó con exito las relaciones en la base de datos.
-
-[SERVER]
--Se ejecuta el servidor correctamente.
--Se utilizo una funcion para cargar los datos de la api, a los registros de la base de datos.
--Contiene sistema de correcion, en caso de que no se carguen los datos a la api, el server no funciona.
--Funciona correctamente.
-
-[CONTROLLERS]
--Se crearon controladores para todos los modelos por separados.
--Se utilizaron todos los métodos vistos, get, post, delete y put.
--Los controladores tiene su respectiva ruta.
-
-[INDEXROUTES]
--Todas los controllers se importaron con éxito.
--Todas las rutas funcionan correctamente y cumplen con sus acciones.
--Cada ruta contiene su controlador funcionando.
 
 
 # TEST Y PUNTOS EXTRAS
