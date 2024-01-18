@@ -1,4 +1,5 @@
 # FRONT.
+*Todo el front es ajustable a responsiv*
 
 [LANDING]
 -Se añade base de datos con usuario.
