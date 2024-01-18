@@ -1,0 +1,59 @@
+.allCont {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* Cambiado a wrap para permitir envolver elementos */
+    justify-content: space-evenly;
+    margin-top: 10vh;
+    margin-left: -5%;
+    padding-bottom: 200px;
+  }
+  
+  .divForActivities {
+    width: 30%; /* Ajusta el ancho según sea necesario para mostrar 3 elementos en una fila */
+    max-width: 400px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border: 0.5vw solid rgb(44, 46, 47);
+    border-radius: 0.5em;
+    position: relative;
+    background-color: rgba(6, 6, 6, 0.700);
+    color: rgb(194, 142, 32);
+    text-align: start;
+    padding: 2%;
+    box-shadow: 0px 0px 2vw rgb(0, 0, 0);
+    margin-bottom: 3vh;
+    margin-left: 20px; /* Ajusta el margen izquierdo según sea necesario */
+    margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+  }
+  
+  .countriesContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+  
+  .img {
+    height: 20px;
+    width: 30px;
+  }
+  
+  @media (max-width: 768px) {
+    .allCont {
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    .divForActivities {
+      width: 80%;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-bottom: 5vh;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .divForActivities {
+      width: 100%;
+    }
+  }

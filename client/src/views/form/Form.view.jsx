@@ -147,6 +147,12 @@ const Form = () => {
 
       <div className={styles.contLink}>
 
+      <Link to="/activities" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
+      <button type="submit" className={styles.btnLink}> Ver las actividades disponibles </button>
+      </Link>
+      <Link to="/updateactivities" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
+      <button type="submit" className={styles.btnLink}> Modificar actividades </button>
+      </Link>
       <Link to="/formaddorremove" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
       <button type="submit" className={styles.btnLink}> Agregar/Eliminar PAÍS </button>
       </Link>

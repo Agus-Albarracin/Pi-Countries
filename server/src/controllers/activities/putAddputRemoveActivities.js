@@ -2,7 +2,7 @@ const { Activity, Country } = require('../../db');
 
 const manageActivityCountries = async (req, res) => {
   try {
-    const { activityName, countries, action } = req.body;
+    const { activityName, action, countries, countryName } = req.body;
 
     // Buscar la actividad por nombre
     const activity = await Activity.findOne({
@@ -13,56 +13,21 @@ const manageActivityCountries = async (req, res) => {
       return res.status(404).json('Actividad no encontrada');
     }
 
-    //* ACTION ADD
     if (action === 'add') {
-    // Obtener los países existentes en la actividad
-  const existingCountries = await activity.getCountries();
-
-  // Filtrar los países que ya existen
-  const duplicateCountries = countries.filter((country) =>
-    existingCountries.some((existingCountry) => existingCountry.name === country)
-  );
-
-  // Si hay países duplicados, lanzar un error
-  if (duplicateCountries.length > 0) {
-    return res.status(404).json({
-      message: 'Uno o más países ya existen en la actividad',
-      duplicateCountries: duplicateCountries,
-    });
-  }
-
-
       // Agregar los países a la actividad
       const selectedCountries = await Country.findAll({
         where: { name: countries }
       });
 
-      if (!selectedCountries) {
+      if (!selectedCountries || selectedCountries.length === 0) {
         return res.status(404).json('Países no encontrados');
       }
 
       await activity.addCountries(selectedCountries);
-
-    //* ACTION REMOVE
     } else if (action === 'remove') {
-            // Obtener los países existentes en la actividad
-  const existingCountries = await activity.getCountries();
-
-  // Filtrar los países que ya existen
-  const duplicateCountries = countries.filter((country) =>
-    existingCountries.some((existingCountry) => existingCountry.name === country)
-  );
-
-  // Si hay países duplicados, lanzar un error
-  if (!duplicateCountries.length > 0) {
-    return res.status(404).json({
-      message: 'Uno o más países ya NO existen en la actividad',
-      duplicateCountries: duplicateCountries,
-    });
-  }
       // Buscar el país que coincide con el nombre proporcionado
-      const countryToRemove = await Country.findAll({
-        where: { name: countries }
+      const countryToRemove = await Country.findOne({
+        where: { name: countryName }
       });
 
       if (!countryToRemove) {

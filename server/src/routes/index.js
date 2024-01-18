@@ -5,6 +5,7 @@ const postActivities = require('../controllers/activities/postActivities')
 const putActivities = require('../controllers/activities/putActivities');
 // prueba del nuevo put
 const addremoveActivities = require("../controllers/activities/putAddputRemoveActivities")
+const updateActivities = require("../controllers/activities/updateActivities")
 const deleteActivities = require("../controllers/activities/deleteActivities")
 
 // Countries
@@ -27,6 +28,7 @@ router.get('/country', getCountryByName)
 router.get('/activities', getActivities)
 router.post('/activities', postActivities)
 router.put("/activities", addremoveActivities)
+router.put("/updateactivities", updateActivities)
 router.delete("/activities", deleteActivities)
 
 

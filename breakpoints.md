@@ -56,8 +56,11 @@
 -El botón dispara una alerta de seguridad.
 -El botón dispara una alerta de éxito.
 -Puede eliminar varias actividades a la vez.
+-Se puede modificar actividad para cambiar el nombre, dificultad, duracion y temporada, lo demas en agregar o eliminar país.
 
-?-Se desea modificar actividad para cambiar el nombre y no eliminar.
+[ACTIVIDADES]
+-Las actividades se renderizan a medida se crean.
+-Muestran los detalles de las actividades.
 
 [DETAIL]
 -Se renderizan correctamente todos los detalles de los países.

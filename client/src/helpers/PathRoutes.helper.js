@@ -6,6 +6,8 @@ const PATHROUTES = {
     FORM: "/form",
     FORMADDORREMOVE: "/formaddorremove",
     FORMREMOVEACTIVITY: "/formremoveactivity",
+    ACTIVITIES: "/activities",
+    UPDATEACTIVITIES: "/updateActivities",
     ERROR: "*",
 }
 

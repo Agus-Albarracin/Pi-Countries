@@ -24,7 +24,7 @@ const navigate = useNavigate();
     return (
         <div className={styles.navMain}>
           <button onClick={handleLogout} className={styles.logout} style={{ backgroundColor: 'transparent', border: "none" }}>
-            <h1>Cerrar Sesión</h1>
+            <h4>Cerrar Sesión</h4>
           </button>
             <div className={styles.links}>
                 {/* <Link to={PATHROUTES.LANDING} className={styles.title}>
