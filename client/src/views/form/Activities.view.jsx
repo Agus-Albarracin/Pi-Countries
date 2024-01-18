@@ -39,8 +39,9 @@ const ActivitiesViews = () => {
               <p>Temporada: {activity.temporada}</p>
               <p>Duración: {activity.duracion}</p>
               <p>Dificultad: {activity.dificultad}</p>
-  
+              <p>Países:</p>
               <div className={styles.countriesContainer}>
+                
                 {relatedCountries.map((country, countryIndex) => (
                   <div key={country.id || countryIndex}>
                     <img className={styles.img} src={country.image} alt={`Flag of ${country.name}`} />
