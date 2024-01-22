@@ -4,24 +4,21 @@ const logInUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Verificar si los campos están presentes y no son cadenas vacías
     if (!email || !password) {
+      console.log("Faltan datos");
       return res.status(400).json({ success: false, message: "Faltan datos." });
     }
-
     const user = await User.findOne({ where: { email } });
 
     if (!user || user.password !== password) {
+      console.log("POST / Usuario o contraseña incorrectos");
       return res.status(404).json({ success: false, message: "Los datos son incorrectos." });
     }
-
-    // Puedes usar bcrypt o alguna otra librería para comparar contraseñas de manera segura
-
-    // Envía una respuesta más descriptiva en caso de éxito
+    console.log("POST / Hubo un inicio de sesión éxitoso.")
     return res.status(200).json({ success: true, message: "Inicio de sesión exitoso" });
 
   } catch (error) {
-    // Envía un objeto más informativo en caso de error
+
     return res.status(500).json({ success: false, message: error.message });
   }
 };

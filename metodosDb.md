@@ -1,5 +1,3 @@
-findAll : es un método de Sequelize que busca todos los registros de la tabla Country.
-
 include: Es para indicar que se deben cargar las relaciones que le pasemos como atributo
 ejemplo: include : Activity
 

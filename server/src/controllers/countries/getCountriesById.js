@@ -14,10 +14,3 @@ const getCountriesById = async (req, res) => {
 
 module.exports = getCountriesById;
 
-
-//linea 5: req.params permite acceder a los parametros de una URL ejemplo: /countries/:id, acceder a :id
-// al mismo tiempo lo que contendra esa variable id = es a lo que se accedio de :id
-
-//el metodo finOne se encargara de hacer la busqueda de un solo registro, que lo devuelve en forma de objeto.
-// donde el objeto where: especifica que el registro que se busca debe contener id: que sea igual al id que
-// se obtuvo anteriormente de req.params

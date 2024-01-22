@@ -2,7 +2,6 @@ const { Router } = require("express");
 // Activities
 const getActivities = require('../controllers/activities/getActivities')
 const postActivities = require('../controllers/activities/postActivities')
-const putActivities = require('../controllers/activities/putActivities');
 // prueba del nuevo put
 const addremoveActivities = require("../controllers/activities/putAddputRemoveActivities")
 const updateActivities = require("../controllers/activities/updateActivities")
