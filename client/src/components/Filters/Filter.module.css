@@ -1,28 +1,27 @@
-/* Estilo para el contenedor principal con display: grid */
+
 .BoxAllFilters {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Crea 3 columnas iguales */
-    gap: 20px; /* Espacio entre las columnas */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; 
     padding: 10px;
   }
   
-  /* Estilo para cada cuadro de filtro */
   .BoxFilterSort {
-    grid-area: 1 / 1 / 2 / 2; /* Asigna la posición (fila/columna) */
+    grid-area: 1 / 1 / 2 / 2;
   }
   
   .BoxFilterContinent {
-    grid-area: 1 / 2 / 2 / 3; /* Asigna la posición (fila/columna) */
+    grid-area: 1 / 2 / 2 / 3; 
   }
   
   .BoxActivityFilter {
-    grid-area: 1 / 3 / 2 / 4; /* Asigna la posición (fila/columna) */
+    grid-area: 1 / 3 / 2 / 4; 
   }
   
   .BoxFilterExtra{
      grid-area: 1 / 4 / 2 / 5;
   }
-  /* Estilo para los selectores */
+  
   .select {
     width: 100%;
     padding: 6px;

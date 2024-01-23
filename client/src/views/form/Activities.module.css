@@ -1,7 +1,7 @@
 .allCont {
     width: 100%;
     display: flex;
-    flex-wrap: wrap; /* Cambiado a wrap para permitir envolver elementos */
+    flex-wrap: wrap; 
     justify-content: space-evenly;
     margin-top: 10vh;
     margin-left: -5%;
@@ -9,7 +9,7 @@
   }
   
   .divForActivities {
-    width: 30%; /* Ajusta el ancho según sea necesario para mostrar 3 elementos en una fila */
+    width: 30%; 
     max-width: 400px;
     height: auto;
     display: flex;
@@ -23,8 +23,8 @@
     padding: 2%;
     box-shadow: 0px 0px 2vw rgb(0, 0, 0);
     margin-bottom: 3vh;
-    margin-left: 20px; /* Ajusta el margen izquierdo según sea necesario */
-    margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+    margin-left: 20px; 
+    margin-right: 20px; 
   }
   
   .countriesContainer {
@@ -42,12 +42,12 @@
   .btnLink { 
     width: 10%;
     border-radius: 1em;
-    border: 0.3vw solid rgb(5, 5, 5); /* Usé vw para el borde */
+    border: 0.3vw solid rgb(5, 5, 5); 
     background-color: white;
     color: black;
     box-sizing: border-box;
     position: fixed;
-    bottom: 20px; /* Ajusta la distancia desde la parte inferior según sea necesario */
+    bottom: 20px; 
     left: 50%;
     transform: translateX(-50%);
     padding: 10px 20px;

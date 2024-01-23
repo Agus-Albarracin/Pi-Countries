@@ -1,12 +1,11 @@
-/*/* LogInComponent.module.css */
 
 .container {
     color: white;
     position: relative;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* Negro semi-transparente */
-    border: 2px solid black; /* Bordes negros */
-    padding: 20px; /* Espaciado interno */
+    background-color: rgba(0, 0, 0, 0.5); 
+    border: 2px solid black; 
+    padding: 20px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,11 +32,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     width: 300px;
-    max-width: 500px; /* Limita el ancho para que el contenido no sea demasiado ancho en dispositivos grandes */
-    margin: 0 auto; /* Centra el contenido en la pantalla */
+    max-width: 500px;
+    margin: 0 auto; 
     display: grid;
-    grid-template-columns: 1fr; /* Una columna para todos los divs menos el div checkbox */
-    gap: 10px; /* Espacio entre elementos */
+    grid-template-columns: 1fr;
+    gap: 10px; 
 }
 
 .content form {
@@ -46,7 +45,7 @@
     align-items: center;
 }
 
-/* Ajustes para mostrar los inputs en columna */
+
 .content label {
     margin-bottom: 5px;
 }
@@ -57,7 +56,7 @@
     margin-bottom: 10px;
 }
 
-/* Estilos para el div que contiene el checkbox y el párrafo */
+
 .checkbox {
     display: flex;
     align-items: center;
@@ -69,15 +68,14 @@
 }
 
 .checkbox label {
-    margin: 0; /* Elimina el margen para que el label esté más cerca del checkbox */
+    margin: 0;
     width: 50px;
 }
 
-/* Media query para dispositivos más pequeños */
+
 @media screen and (max-width: 600px) {
     .content {
-        padding: 10px; /* Reduce el padding en dispositivos más pequeños */
+        padding: 10px; 
     }
 
-    /* Ajustes adicionales según sea necesario para dispositivos más pequeños */
 }
