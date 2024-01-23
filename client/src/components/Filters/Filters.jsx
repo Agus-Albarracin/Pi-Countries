@@ -11,7 +11,8 @@ import {
         sortCountriesByNameAscending,
         sortCountriesByNameDescending,
         sortCountriesByPopulationAscending,
-        sortCountriesByPopulationDescending} from '../../redux/actions';
+        sortCountriesByPopulationDescending,
+        } from '../../redux/actions';
 
 
 import axios from "axios";

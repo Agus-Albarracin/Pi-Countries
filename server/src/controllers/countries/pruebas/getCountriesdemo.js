@@ -1,25 +1,19 @@
-const { Countries,Activities } = requiere("../../db");
+const {Dogs, Temperaments} = require ("../../db")
 
-const getCountriess = async (req, res) =>{
+const gets = async (req, res) => {
     try{
-   
-    let getAllcountries = await Countries.findAll({
-        includes: Activities,
-        attributes: { exclude : ["updateAt"]},
-    })
-    if(!getAllcountries){
-        return res.status(404).json({message: "hay un error al cargar"})
-    } else {
+     let allgets = await Dogs.findAll({
+        include: Temperaments,
+        attributes: {exclude: ["createdAt", "updateAt"]}
+     })
+     if(!allgets){return res.status(400).json({message: error.message})}
 
-        getAllcountries = getAllcountries.map(ele => ele.get());
-        return res.status(200).json(getAllcountries)
-    }
-
+     allgets = allgets.map(e => e.get())
+     return res.status(200).json(allgets)
 
     }catch(error){
         return res.status(500).json({message: error.message})
     }
 }
 
-
-module.exports = getCountriess
+module.exports = gets

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import PATHROUTES from '../../helpers/PathRoutes.helper';
 
 // Styles
@@ -23,12 +23,17 @@ const LogInComponent = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  window.addEventListener('popstate', (event) => {
-   window.alert("Por motivos de seguridad bloqueamos la página \nCierre la pestaña y vuelva a abrirla")
-   window.location.reload()
-   navigate("/")
+  const { pathname } = useLocation();
 
-  });
+  if(pathname === "/"){
+
+    window.addEventListener('popstate', (event) => {     
+      window.alert("Por motivos de seguridad bloqueamos la página \nCierre la pestaña y vuelva a abrirla")
+      window.location.reload()
+      navigate("/")
+      
+    });
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;

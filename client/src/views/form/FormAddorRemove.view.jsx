@@ -132,7 +132,7 @@ const handleSubmit = async (event) => {
   
       } catch (error) {
         if(error.response){
-          const {status} = error.response;
+          const {status, data} = error.response;
           if(status === 404){
             console.log("ya existe")
             alert("El país ya existe en la actividad")

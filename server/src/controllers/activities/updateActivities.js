@@ -3,10 +3,10 @@ const {Activity} = require("../../db")
     const updateActivity = async (req, res) => {
         try {
           
-          const { selectedActivity, name, dificultad, duracion, temporada, countries } = req.body;
+          const { originalName, name, dificultad, duracion, temporada, countries } = req.body;
 
     
-          const existingActivity = await Activity.findOne({ name: selectedActivity });
+          const existingActivity = await Activity.findOne({ name: originalName });
 
           if (!existingActivity) {
             return res.status(404).json({ message: "Actividad no encontrada" });

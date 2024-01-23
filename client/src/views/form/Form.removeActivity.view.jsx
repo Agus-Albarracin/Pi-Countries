@@ -12,20 +12,29 @@ import styles from "./Form.module.css";
 const FormRemoveActivity = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getActivities())
-      }, [dispatch]);
     
-  const activityNames = useSelector((state) => state.activities.map((activity) => activity.name))
+    const activityNames = useSelector((state) => state.activities.map((activity) => activity.name))
+    
+    const [values, setValues] = useState({
+      selectedActivity: [],
+    });
+    
+    const [errors, setErrors] = useState({
+      selectedActivity: "",
+    });
+    
+    const [formValid, setFormValid] = useState(false);
+    
+    useEffect(() => {
+      dispatch(getActivities())
+      const allFieldsFilled = Object.values(values).every((value) => {
+        if (Array.isArray(value)) { return value.length > 0;} });
+      const noErrors = Object.values(errors).every((error) => !error);
+      
+      setFormValid(allFieldsFilled && noErrors);
+      }, [dispatch, values, errors]);
 
-  const [values, setValues] = useState({
-    selectedActivity: [],
-  });
-
-  const [errors, setErrors] = useState({
-    selectedActivity: "",
-  });
-
+      
 
   const handleSelectActivityChange = (event) => {
     const selectedActivities = Array.from(
@@ -123,7 +132,7 @@ const handleSubmit = async (event) => {
         </label>
 
         <section>  <br />
-        <button type="submit" className={styles.btnDelete}>
+        <button type="submit" disabled={!formValid} className={styles.btnDelete}>
             Eliminar actividad
         </button>
 

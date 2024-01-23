@@ -18,7 +18,7 @@ import {
 } from './validations'; // Asegúrate de tener la ruta correcta
 
 // Components
-import Filters from "../../components/Filters/Filter";
+import Filter from "../../components/Filters/Filter";
 
 // Actions 
 import { getCountries, resetCountries } from "../../redux/actions"
@@ -36,13 +36,6 @@ const Form = () => {
     return state.countries.map((country) => country.name)
   },[]);
 
-  useEffect(() => {
-
-    dispatch(getCountries());
-    dispatch(resetCountries());
-  }, [dispatch]);
-
-  
   const [values, setValues] = useState({
     
     name: "",
@@ -60,15 +53,91 @@ const Form = () => {
     continent: "",
     country: "",
   });
+  const [formValid, setFormValid] = useState(false);
   
+  useEffect(() => {
+    dispatch(getCountries());
+    dispatch(resetCountries());
+
+
+  }, [dispatch]);
+ 
+  useEffect(() => {
+    const allFieldsFilled = Object.values(values).every((value) => {
+      if (Array.isArray(value)) { return value.length > 0;
+      } else { return value !== ""; } 
+    });
+    const noErrors = Object.values(errors).every((error) => !error);
+    setFormValid(allFieldsFilled && noErrors);
+  }, [values, errors ])
   
 
-    const handleChange = (event) => {
-      setValues({
-        ...values,
-        [event.target.name]: event.target.value,
-      });
-    };
+  
+  //!
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+  
+    const newError = validateField(name, value);
+  
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  
+    setErrors({
+      ...errors,
+      [name]: newError,
+    });
+  };
+  
+  const validateField = (name, value) => {
+    switch (name) {
+      case 'name':
+        return validateName(value);
+      case 'dificultad':
+        return validateDificultad(value);
+      case 'duracion':
+        return validateDuracion(value);
+      case 'temporada':
+        return validateTemporada(value);
+      case 'continent':
+      case 'country':
+        return validateCountries(value);
+      default:
+        return false; 
+    }
+  };
+
+
+  
+  //!
+
+    // const handleChange = (event) => {
+    //   setValues({
+    //     ...values,
+    //     [event.target.name]: event.target.value,
+    //   });
+
+    //   const newErrors = { 
+    //     name: validateName(values.name),
+    //     dificultad: validateDificultad(values.dificultad),
+    //     duracion: validateDuracion(values.duracion),
+    //     temporada: validateTemporada(values.temporada),
+    //     continent: validateCountries(values.countries),
+    //     country: validateCountries(values.countries),
+    //   };
+    //  //hay errores? todos deberian ser false.
+      
+    //   setErrors(newErrors);
+
+    //   const formValid = Object.values(newErrors).every(error => !error);
+    //   //hay errores? todos deberian ser false, y every deberia devolver true. Y saltear mi condicion.
+      
+    //   if (!formValid) {
+    //   //Si, hay errores, detengo la ejecucion.
+    //     return;
+    //   }
+    // };
    
 
   const handleSelectChange = (event) => {
@@ -87,8 +156,8 @@ const Form = () => {
 //*SUBMIT
   const handleSubmit = async (event) => {
       event.preventDefault();
-    
-      const newErrors = { 
+
+            const newErrors = { 
         name: validateName(values.name),
         dificultad: validateDificultad(values.dificultad),
         duracion: validateDuracion(values.duracion),
@@ -106,8 +175,9 @@ const Form = () => {
       if (!formValid) {
       //Si, hay errores, detengo la ejecucion.
         return;
-      }
-
+      } 
+   
+    
     try {
       const response = await axios.post('http://localhost:3001/activities', values)
         const successfulMessage = `Se ha creado la nueva actividad turística: ${values.name}`;
@@ -126,18 +196,20 @@ const Form = () => {
     } catch (error) {
       if (error.response && error.response.data) {
 
-        alert('Ya existe una actividad con ese nombre.');
+        alert("Hubo un error al crear la actividad.");
         // window.location.reload();
       }
       else console.error(error);
     }
   };
   
+  // const handleFilterChange = (continent) => {
+  //   console.log(`Cambió el continente a: ${continent}`);
+  // };
+
   const handleFilterChange = (continent) => {
-    console.log(`Cambió el continente a: ${continent}`);
+    dispatch(filterCountriesByContinent(continent))
   };
-
-
 
 
   return (
@@ -157,8 +229,9 @@ const Form = () => {
       <Link to="/formRemoveActivity" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
       <button type="submit" className={styles.btnLink}> Eliminar Actividad </button>
       </Link>
+      <br /> <br /> <br /> <br />
       <Link to="/home" className={styles.linkDiv} style={{ textDecoration: 'none', color: 'inherit'}}>
-      <button type="submit" className={styles.btnLink}> Volver al home </button>
+      <button type="submit" className={styles.btnLink}> Volver al home 🔙</button>
       </Link>
 
 
@@ -167,7 +240,7 @@ const Form = () => {
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Crear actividad</h1>
-
+        
         <label className={styles.label}>
           Nombre: <input className={styles.input} type="text" name="name" value={values.name} onChange={handleChange} placeholder="Ingresa nombre de la actividad" />
           {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
@@ -199,7 +272,7 @@ const Form = () => {
 
 
         Continente:
-        <Filters onChange={handleFilterChange} className={styles.selectForm}/>
+        <Filter onChange={handleFilterChange} className={styles.selectForm}/>
         <label className={styles.label}>
         {errors.continent && <p className={styles.errorMessage}>{errors.continent}</p>}
 
@@ -217,7 +290,7 @@ const Form = () => {
         </label>
 
 
-        <button type="submit" className={styles.btn}>Crear actividad turística</button>
+        <button type="submit" disabled={!formValid} className={styles.btnsubmit}>Crear actividad turística</button>
       </form>
 
 

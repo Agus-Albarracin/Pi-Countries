@@ -29,7 +29,7 @@ const actionsActivityCountries = async (req, res) => {
     } else if (action === 'remove') {
 
       const countryToRemove = await Country.findOne({
-        where: { name: countryName }
+        where: { name: countries }
       });
 
       if (!countryToRemove) {

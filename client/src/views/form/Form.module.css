@@ -54,6 +54,7 @@
 .input,
 .select,
 .btn,
+.btnsubmit,
 .btnupdate {
     width: 98%;
     padding: 2%;
@@ -70,12 +71,14 @@
 }
 
 .btn,
+.btnsubmit,
 .btnLink {
     max-height: 5vh; 
     transition: background-color 0.2s ease-out 0.2s;
 }
 
 .btn:hover,
+.btnsubmit:hover,
 .btnLink:hover{
     background-color: rgb(194, 142, 32);
     color: black;
@@ -92,6 +95,11 @@
 .btnAdd:hover{
     background-color:green;
     color: black;
+}
+
+.btnsubmit:disabled,
+.btnDelete:disabled{
+    background-color: rgba(255, 255, 255, 0.301);
 }
 
 .errorMessage {

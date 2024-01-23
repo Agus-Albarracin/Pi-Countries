@@ -64,8 +64,18 @@ const SearchBar = () => {
 
         allCountries.filter((country) =>
             country.name.toLowerCase().includes(value.toLowerCase())
+            
         );
-
+        //resets de filters
+        const selectAllActivityFilter = document.getElementById("selectActivityFilter")
+        selectAllActivityFilter.value = "all"
+        console.log(selectAllActivityFilter.value)
+        const selectAllContinentFilter = document.getElementById("selectContinentFilter")
+        selectAllContinentFilter.value = "all"
+        const selectDefaultExtra= document.getElementById("selectFilterExtra")
+            selectDefaultExtra.value = "default" 
+        const selectSortAll = document.getElementById("selectSortFilter")
+                selectSortAll.value = "unsorted"
         dispatch(searchCountries(value));
         dispatch(setCurrentPage(1));
     };
