@@ -27,9 +27,7 @@ const LogInComponent = () => {
    window.alert("Por motivos de seguridad bloqueamos la página \nCierre la pestaña y vuelva a abrirla")
    window.location.reload()
    navigate("/")
-    
-    // Puedes realizar acciones específicas según el nuevo estado del historial
-    // Por ejemplo, podrías redirigir o actualizar la página según tus necesidades
+
   });
 
   const handleChange = (e) => {
@@ -43,7 +41,7 @@ const LogInComponent = () => {
   };
 
   const validateInput = (name, value) => {
-    // ... (tu código de validación actual)
+
     switch (name) {
       case 'email':
         setErrors({
@@ -77,7 +75,7 @@ const LogInComponent = () => {
 
         console.log('Inicio de sesión exitoso:');
 
-        // Redirigir al usuario a la página principal después de iniciar sesión
+       
         navigate('/home');
       } catch (error) {
         console.error('Error al iniciar sesión:', error.message);
@@ -89,7 +87,7 @@ const LogInComponent = () => {
   };
 
   const validateForm = () => {
-    // ... (tu código de validación actual)
+  
     return Object.values(errors).every((error) => error === '');
   };
 

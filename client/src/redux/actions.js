@@ -29,10 +29,7 @@ export const getCountries = () => {
         try {
             const {data}= await axios.get("http://localhost:3001/countries");
             // console.log(data)
-            dispatch({
-                type: GET_COUNTRIES,
-                payload: data
-            });
+            dispatch({type: GET_COUNTRIES,payload: data});
         } catch (error) {
             console.error("Error al obtener los países:", error);
         }
@@ -53,117 +50,76 @@ export const getCountries = () => {
 export const getActivities = () => {
     return async (dispatch) => {
       try {
+
         const { data } = await axios.get("http://localhost:3001/activities");
-        dispatch({
-          type: GET_ACTIVITIES,
-          payload: data
-        });
+        dispatch({ type: GET_ACTIVITIES, payload: data });
+
       } catch (error) {
         console.error("Error al obtener las actividades:", error);
       }
     }
   };
 
-//* SEARCH QUE FUNCIONA.
-// export const searchCountries = (name) => {
-//     return async (dispatch) => {
-//         try {
-//             const response = await axios.get(`http://localhost:3001/country?name=${name}`);
-//             if (response.data.length === 0){
-//                 window.alert(`No se encontró ningún país con el nombre ${name}`)
-//             } else {
-//                 const dataArray = [response.data];
-//                 dispatch({
-//                     type: SEARCH_COUNTRIES,
-//                     payload: dataArray
-//                 })
-//             }
-//         } catch (error) {
-//             console.error(`Error al buscar países bajo el nombre ${name}:`, error);
+//   export const getActivities= () => {
+//     return async(dispatch) => {
+//         try{
+//             fetch("http://localhost:3001/activities")
+//             .then(res => res.json())
+//             .then(data => dispatch({type: GET_ACTIVITIES, payload: data}))
+//         }catch(error){
+//             console.error("Error")
 //         }
 //     }
-// }
+//   }
 
-export const searchCountries = (name) => {
-    return async (dispatch, getState) => {
-        try {
-            const allCountries = getState().allCountries;
-            const filteredCountries = allCountries.filter((country) =>
-                country.name.toLowerCase().includes(name.toLowerCase())
-            );
-            dispatch({
-                type: SEARCH_COUNTRIES,
-                payload: filteredCountries,
-            });
-            dispatch(setCurrentPage(1)); // Establece la página actual en 1 luego de la búsqueda
-        } catch (error) {
-            console.error(`Error al buscar países bajo el nombre ${name}:`, error);
-        }
-    };
-};
-
-
-// export const searchCountries = (name) => {
-//     return (dispatch) => {
-//         fetch(`http://localhost:3001/country?name=${name}`)
-//         .then(res =>{
-//             if(!res.ok){
-//                 throw new Error("No se encontro ningun nombre")
-//             } else {
-//               return res.json()
-//             }
-//         })
-//         .then(data =>{
-//             if(data.length === 0) {
-//                 window.alert("No se encontro ningun pais")
-//             } else {
-//                 const thedata = [data]
-//                dispatch({type: SEARCH_COUNTRIES, payload: thedata})
-//             }
-//         } )
-//         .catch(error => error)
-//     }
-// }
 
 export const deleteActivity = (activityId) => {
     return async (dispatch) => {
       try {
         await axios.delete(`http://localhost:3001/activities/${activityId}`);
-        dispatch({
-          type: DELETE_ACTIVITY,
-          payload: activityId // Envía el ID de la actividad a eliminar
-        });
+        dispatch({type: DELETE_ACTIVITY, payload: activityId });
+        
       } catch (error) {
         console.error('Error al eliminar la actividad:', error);
       }
     };
   };
 
+// export const deleteActivity = (activityId) => {
+//     return async (dispatch) => {
+    //         fetch(`http://localhost:3001/activities/${activityId}`)
+    //         .then(res => res.json())
+    //         .then(data => dispatch({type: DELETE_ACTIVITY, payload: data}))
+    //     }
+    // }
+    
 
 
-export const setCurrentPage = (page) => {
-    return {
-        type: SET_CURRENT_PAGE,
-        payload: page,
-    }
-}
+    export const searchCountries = (name) => {
+        return async (dispatch, getState) => {
+            try {
+                const allCountries = getState().allCountries;
+                const filteredCountries = allCountries.filter((country) =>
+                    country.name.toLowerCase().includes(name.toLowerCase())
+                );
+                dispatch({
+                    type: SEARCH_COUNTRIES,
+                    payload: filteredCountries,
+                });
+            } catch (error) {
+                console.error(`Error al buscar países bajo el nombre ${name}:`, error);
+            }
+        };
+    };
 
-export const resetCountries = () => {
-    return {
-        type: RESET_COUNTRIES,
-    }
-}
 
-export const resetActivities = () => {
-    return {
-        type: RESET_ACTIVITIES,
-    }
-}
 
+//Seteo antes el estado, lo modifico y lo retorno. para cuando llega al reducer ya lo tengo modificado.
 
 export const filterCountriesByContinent = (continent) => {
     return (dispatch, getState) => {
         const allCountries = getState().allCountries;
+
         const filteredCountries = 
             continent === "all"
             ? allCountries
@@ -175,12 +131,13 @@ export const filterCountriesByContinent = (continent) => {
     }
 }
 
-// En tus actions.js
+
+//Este filtro lo hice para filtrar por continentes en las actividades.
 export const filterExtra = (continent, activity) => {
     return (dispatch, getState) => {
       const allCountries = getState().allCountries;
   
-      // Filtrar los países que pertenecen al continente y cumplen con la actividad
+      
       const filteredCountries = allCountries.filter(country =>
         country.continente.toLowerCase() === continent.toLowerCase() &&
         country.Activities.some(act =>
@@ -192,6 +149,7 @@ export const filterExtra = (continent, activity) => {
         type: FILTER_EXTRA_ACTIVITYFORCONTINENT,
         payload: filteredCountries,
       });
+
     };
   };
 
@@ -199,22 +157,29 @@ export const filterCountriesByActivity = (activity) => {
     return (dispatch, getState) => {
         try {
             const allCountries = getState().allCountries;
+
+
             let filteredCountries;
             if (activity === "all"){
                 filteredCountries = allCountries;
             } else {
-                filteredCountries = allCountries.filter((country) => country.Activities.some((act) => act.name === activity));  
-
+                filteredCountries = allCountries.filter((country) => country.Activities.some((act) => act.name === activity));
+                //filtro los paises que dentro del array de activities, cumplan con la actividad que le paso x parametro.  
             }
+
+
             dispatch ({
                 type: FILTER_COUNTRIES_BY_ACTIVITY,
                 payload: filteredCountries
             })
+
         } catch (error) {
             console.error('Error al filtrar países por actividad', error);
         }
     }
 }
+
+//* SORT
 
 export const sortCountriesByNameAscending = () => {
     return {
@@ -239,3 +204,24 @@ export const sortCountriesByPopulationDescending = () => {
         type: SORT_COUNTRIES_BY_POPULATION_DESCENDING,
     };
 };
+
+//*PAGINATION
+
+export const setCurrentPage = (page) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        payload: page,
+    }
+}
+
+export const resetCountries = () => {
+    return {
+        type: RESET_COUNTRIES,
+    }
+}
+
+export const resetActivities = () => {
+    return {
+        type: RESET_ACTIVITIES,
+    }
+}

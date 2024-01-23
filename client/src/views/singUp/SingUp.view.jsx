@@ -26,7 +26,6 @@ const SignUpComponent = () => {
       [name]: value,
     });
 
-    // Realizar validaciones en tiempo real mientras el usuario escribe
     validateInput(name, value);
   };
 
@@ -54,7 +53,7 @@ const SignUpComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Realizar las validaciones finales antes de enviar la solicitud
+    
     if (validateForm()) {
       try {
         const response = await axios.post('http://localhost:3001/singup', {
@@ -64,11 +63,11 @@ const SignUpComponent = () => {
 
         console.log('Usuario registrado con éxito:');
         alert("Se ha registrado con éxito")
-        // Redirigir al usuario después del registro exitoso
+       
         navigate(PATHROUTES.LANDING);
       } catch (error) {
         console.error('Error al registrar usuario:', error.message);
-        // Mostrar un mensaje al usuario sobre el error
+      
         alert("Error al registrar usuario. Verifica tus datos e intenta nuevamente.");
       }
     }

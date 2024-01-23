@@ -1,13 +1,13 @@
 export const validateName = (name) => {
     return !name || /[^a-zA-Z ]/.test(name)
       ? "El nombre de la actividad es obligatorio y no puede contener números."
-      : "";
+      : null;
   };
   
   export const validateDificultad = (dificultad) => {
     return !dificultad || dificultad < 1 || dificultad > 5
       ? "La dificultad debe ser un número entre 1 y 5."
-      : "";
+      : null;
   };
   
   export const validateDuracion = (duracion) => {

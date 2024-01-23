@@ -3,7 +3,7 @@ import { useEffect, useState} from 'react';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
-import { getCountries, setCurrentPage, filterCountriesByContinent } from '../../redux/actions';
+import { getCountries, setCurrentPage, filterCountriesByContinent, resetCountries } from '../../redux/actions';
 // Components
 import Cards from '../../components/Cards/Cards';
 import Filters from '../../components/Filters/Filters';
@@ -12,6 +12,7 @@ import styles from './Home.module.css';
 
 const Home = () => {
     const dispatch = useDispatch();
+    
     const countries = useSelector((state) => state.countries);
     const [selectedActivity, setSelectedActivity] = useState("all"); // Estado para la actividad seleccionada
 

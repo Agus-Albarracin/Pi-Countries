@@ -1,17 +1,9 @@
-// Importa el componente Form y las bibliotecas necesarias para las pruebas
-import React from 'react';
-import configureStore from 'redux-mock-store';
-import { validateName, validateDificultad, validateDuracion, validateTemporada, validateCountries} from "../src/views/form/validations"
+import { validateName,
+   validateDificultad,
+    validateDuracion,
+     validateTemporada,
+      validateCountries} from "../src/views/form/validations"
 
-// Crea un store ficticio utilizando redux-mock-store
-const mockStore = configureStore([]);
-const store = mockStore({
-    name: "Correr",
-    dificultad: "1",
-    duracion: "1",
-    temporada: "Otoño",
-    countries: ["Iraq", "Tajikistan"],
-  });
 
 
   describe('Validación del nombre de la actividad', () => {
@@ -78,18 +70,3 @@ const store = mockStore({
       expect(validateCountries(validCountries)).toBe('');
     });
   });
-
-
-        // //* COUNTRIES 
-        
-        // it('Debería devolver un mensaje si no se selecciona ningún país', () => {
-        //     const countries = [];
-        //     const validationResult = validateCountries(countries);
-        //     expect(validationResult).toBe('Selecciona al menos un continente y un país.');
-        //     });
-            
-        // it('Debería devolver un string vacío si se selecciona al menos un país', () => {
-        //     const countries = ['Iraq'];
-        //     const validationResult = validateCountries(countries);
-        //     expect(validationResult).toBe('');
-        //     });

@@ -62,18 +62,16 @@ const SearchBar = () => {
         const { value } = e.target;
         setName(value);
 
-        // Filtrar los países en base a las letras ingresadas
-        const filteredCountries = allCountries.filter((country) =>
+        allCountries.filter((country) =>
             country.name.toLowerCase().includes(value.toLowerCase())
         );
 
-        // Despachar la acción para actualizar los países filtrados
         dispatch(searchCountries(value));
-        dispatch(setCurrentPage(1)); // Establecer la página actual en 1 después de la búsqueda
+        dispatch(setCurrentPage(1));
     };
 
     const handleReset = () => {
-        setName(''); // Restablecer el estado del nombre
+        setName(''); 
         dispatch(resetCountries());
         dispatch(setCurrentPage(1));
     };
@@ -88,7 +86,7 @@ const SearchBar = () => {
                 placeholder='Escribe el nombre de un país 🔍'
             />
             <button className={styles.btn} onClick={handleReset}>
-                Reset
+                Borrar
             </button>
         </div>
     );

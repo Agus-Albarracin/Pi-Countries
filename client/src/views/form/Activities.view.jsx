@@ -1,14 +1,10 @@
 // Router
-import { useParams, Link, } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // React
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-// Helpers
-import PATHROUTES from '../../helpers/PathRoutes.helper';
 //actions
 import { getActivities, getCountries } from "../../redux/actions";
-// Axios
-import axios from 'axios';
 //styles 
 import styles from './Activities.module.css';
 
@@ -24,11 +20,11 @@ const ActivitiesViews = () => {
     }, [dispatch]);
   
     return (
-        <div className={styles.allCont}>
+      <div className={styles.allCont}>
         {activities.map((activity, index) => {
           const activityName = activity.name;
   
-          // Filtrar los países relacionados con la actividad actual
+          //*Filtro de paises con actividad.
           const relatedCountries = countries.filter((country) =>
             country.Activities.some((act) => act.name === activityName)
           );
@@ -37,14 +33,14 @@ const ActivitiesViews = () => {
             <div key={activity.id || index} className={styles.divForActivities}>
               <h1>{activityName}</h1>
               <p>Temporada: {activity.temporada}</p>
-              <p>Duración: {activity.duracion}</p>
-              <p>Dificultad: {activity.dificultad}</p>
+              <p>Duración: {activity.duracion} hs</p>
+              <p>Dificultad: {activity.dificultad} de 5</p>
               <p>Países:</p>
-              <div className={styles.countriesContainer}>
-                
+
+              <div className={styles.countriesContainer}>               
                 {relatedCountries.map((country, countryIndex) => (
                   <div key={country.id || countryIndex}>
-                    <img className={styles.img} src={country.image} alt={`Flag of ${country.name}`} />
+                    <img className={styles.img} src={country.image} alt={`Bandera de ${country.name}`} />
                   </div>
                 ))}
               </div>

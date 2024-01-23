@@ -14,9 +14,7 @@ const navigate = useNavigate();
 
 
   const handleLogout = () => {
-    // Limpiar la sesión u otros pasos de cierre de sesión aquí
-
-    // Navegar a la página de inicio
+   
     navigate(PATHROUTES.LANDING, { replace: true });
   };
 
@@ -41,7 +39,7 @@ const navigate = useNavigate();
             <div className={styles.searchBar}>
             <Routes>
                 <Route path={PATHROUTES.HOME} element={<SearchBar />} />
-                {/* Agrega aquí más Route para otras rutas */}
+               
             </Routes>
             </div>
         </div>

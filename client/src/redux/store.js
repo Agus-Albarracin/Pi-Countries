@@ -1,9 +1,9 @@
-// Redux
+// //Redux
 // import { createStore, applyMiddleware, compose } from 'redux';
 // // Reducer
 // import rootReducer from './reducer';
 // // Thunk
-// import {thunkMiddleware} from 'redux-thunk'
+// import thunkMiddleware from 'redux-thunk'
 
 // const composerEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ || compose
 
@@ -12,7 +12,7 @@
 //   composerEnhancer(applyMiddleware(thunkMiddleware))
 // );
 
-// export default store;
+// export default store
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './reducer';

@@ -45,38 +45,30 @@ const FormRemoveActivity = () => {
 
 
 const handleSubmit = async (event) => {
-    event.preventDefault();
+      event.preventDefault();
 
-
+      //*ERRORS
       setErrors({
         selectedActivity: values.selectedActivity.length > 0 ? "" : "Seleccione al menos una actividad",
       });
-  
-      // Verificar si hay errores en los campos
+
       if (Object.values(errors).some((error) => error !== "")) {
         return;
       }
-
+    
       // Obtener el nombre de la actividad seleccionada
       const selectedActivity = values.selectedActivity[0];
-      // Obtener la información de la actividad actual para obtener su ID
+      //Estoy usando el name como ID para identificar, total el select renderiza lo mismo.
       const activityId= activityNames.find((activity) => activity === selectedActivity);
-      console.log(activityId)
 
       if (!activityId) {
         console.error("No se encontró información para la actividad seleccionada");
         return;
       }
 
-      console.log(activityId)
-
-          // Preguntar al usuario antes de eliminar
-    const confirmDelete = window.confirm("¿Estás seguro que deseas eliminar esta actividad?");
-
-    if (!confirmDelete) {
-      // Si el usuario elige "Cancelar" en la alerta, no hagas nada
-      return;
-    }
+  
+      const confirmDelete = window.confirm("¿Estás seguro que deseas eliminar esta actividad?");
+      if (!confirmDelete) { return; }
 
       const eliminarActivities = {
         activityName: selectedActivity,
@@ -85,13 +77,12 @@ const handleSubmit = async (event) => {
       console.log(eliminarActivities)
 
    
-        try{
+  try{
         //siempre que use un delete, recordar que cuando envie dato por el cuerpo de la solicitud debo usar {data: acavalainfo},
         //esta estructura ya que no siempre al momento de enviar la solicitud, estoy enviando un json para que el back lo resiva.
         await axios.delete(`http://localhost:3001/activities`, { data: eliminarActivities });
 
 
-        // Limpiar el formulario y mostrar un mensaje de éxito
         setValues({
           selectedActivity: [],
         });
@@ -101,21 +92,18 @@ const handleSubmit = async (event) => {
         navigate(PATHROUTES.FORM)
 
   
-      } catch (error) {
-        console.error(error);
-      }
+  } catch (error) {console.error(error); }
 
-
-    
-  };
+};
 
 
 
   return (
     <div className={styles.formDiv}>
-    <Link to="/form" className={styles.linkDiv}
-    style={{ textDecoration: 'none', color: 'inherit' }}>
-         <button type="submit" className={styles.btnLink}>Volver </button> </Link>
+      <Link to="/form" className={styles.linkDiv}
+       style={{ textDecoration: 'none', color: 'inherit' }}>
+       <button type="submit" className={styles.btnLink}>Volver </button> 
+      </Link>
 
 
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -123,7 +111,8 @@ const handleSubmit = async (event) => {
 
         <label className={styles.label}>
           Actividades Actuales:
-        <select className={styles.input} name="selectedActivity" multiple value={values.selectedActivity} onChange={handleSelectActivityChange } >
+        <select className={styles.input} name="selectedActivity" value={values.selectedActivity} onChange={handleSelectActivityChange } >
+              <option>Selecciona una actividad</option>
           {activityNames.map((name) => (
                 <option key={name} value={name}>
                   {name}

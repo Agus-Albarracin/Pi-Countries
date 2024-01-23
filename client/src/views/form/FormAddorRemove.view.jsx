@@ -7,7 +7,7 @@ import { getCountries, resetCountries, getActivities } from "../../redux/actions
 import Filters from "../../components/Filters/Filter";
 import PATHROUTES from "../../helpers/PathRoutes.helper";
 
-import {validateCountries, validateCountries2, validateContinent } from "./validations";
+import {validateCountries, validateContinent } from "./validations";
 import styles from "./Form.module.css";
 
 
@@ -81,34 +81,27 @@ const handleSubmit = async (event) => {
     console.log(buttonAction)
     const action = buttonAction.getAttribute('action');
 
-
+    //*ERRORS
       setErrors({
         continent: validateContinent(values.continent),
         countries: validateCountries(values.countries),
         selectedActivity: values.selectedActivity.length > 0 ? "" : "Seleccione al menos una actividad",
       });
-  
-      // Verificar si hay errores en los campos
-      if (Object.values(errors).some((error) => error !== "")) {
-        return;
-      }
+      if (Object.values(errors).some((error) => error !== "")) { return;}
 
 
-
-      // Obtener el nombre de la actividad seleccionada
+     //*INFO DE ACTIVITY
       const selectedActivity = values.selectedActivity[0];
-      // Obtener la información de la actividad actual para obtener su ID
       const activityId= activityNames.find((activity) => activity === selectedActivity);
       console.log(activityId)
-
       if (!activityId) {
         console.error("No se encontró información para la actividad seleccionada");
         return;
       }
-
       console.log(activityId)
 
-      // Crear el objeto a enviar en la solicitud PUT
+      //*OBJETO REQUEST
+      // Creo el objeto para poder enviar la solicitud put.
       const addOrRemovePais = {
         activityName: selectedActivity,
         countries: values.countries,
@@ -116,19 +109,18 @@ const handleSubmit = async (event) => {
       };
       console.log(addOrRemovePais)
 
+
+    //* ADD
       if(addOrRemovePais.action === "add"){
 
         const confirmAdd = window.confirm("¿Estás seguro que deseas agregar el/los países?");
 
-        if (!confirmAdd) {
-          // Si el usuario elige "Cancelar" en la alerta, no hagas nada
-          return;
-        }
+        if (!confirmAdd) { return; }
 
         try{
 
         await axios.put(`http://localhost:3001/activities`, addOrRemovePais);
-        // Limpiar el formulario y mostrar un mensaje de éxito
+        
         setValues({
           selectedActivity: [],
           countries: [],
@@ -136,11 +128,11 @@ const handleSubmit = async (event) => {
   
         alert("País agregado a la actividad exitosamente");
   
-        navigate(PATHROUTES.HOME)
+        navigate(PATHROUTES.ACTIVITIES)
   
       } catch (error) {
         if(error.response){
-          const {status, data} = error.response;
+          const {status} = error.response;
           if(status === 404){
             console.log("ya existe")
             alert("El país ya existe en la actividad")
@@ -151,6 +143,8 @@ const handleSubmit = async (event) => {
           console.error(error);
         }
       }
+
+
   //*REMOVE
 
     } else if (addOrRemovePais.action === "remove"){
@@ -158,7 +152,7 @@ const handleSubmit = async (event) => {
         const confirmDelete = window.confirm("¿Estás seguro que deseas eliminar el/los países?");
       
         if (!confirmDelete) {
-        // Si el usuario elige "Cancelar" en la alerta, no hagas nada
+        
         return;
         }
     
@@ -167,10 +161,10 @@ const handleSubmit = async (event) => {
  
   
        await axios.put(`http://localhost:3001/activities`, addOrRemovePais);
-            // Obtener la actividad actualizada después de realizar la acción
+            
 
 
-        // Limpiar el formulario y mostrar un mensaje de éxito
+        
         setValues({
           selectedActivity: [],
           countries: [],
@@ -178,11 +172,11 @@ const handleSubmit = async (event) => {
   
         alert("País eliminado de la actividad exitosamente");
   
-        navigate(PATHROUTES.FORM)
+        navigate(PATHROUTES.ACTIVITIES)
   
         } catch (error) {
           if(error.response){
-            const {status, data} = error.response;
+            const {status } = error.response;
             if(status === 404){
               console.log("No existe en la actividad")
               alert("El país NO existe en la actividad, por lo tanto no se puede eliminar")

@@ -29,8 +29,6 @@ import styles from './Form.module.css';
 
 
 const Form = () => {
-  // const dispatch = useDispatch()
-  // dispatch(resetCountries())
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,21 +37,29 @@ const Form = () => {
   },[]);
 
   useEffect(() => {
-    // Aquí puedes despachar la acción GET_COUNTRIES para obtener los datos iniciales
+
     dispatch(getCountries());
     dispatch(resetCountries());
   }, [dispatch]);
 
-
-  const [values, setValues] = useState({
   
+  const [values, setValues] = useState({
+    
     name: "",
     dificultad: "",
     duracion: "",
     temporada: "",
     countries: [],
   });
-
+  
+  const [errors, setErrors] = useState({
+    name: "",
+    dificultad: "",
+    duracion: "",
+    temporada: "",
+    continent: "",
+    country: "",
+  });
   
   
 
@@ -63,8 +69,7 @@ const Form = () => {
         [event.target.name]: event.target.value,
       });
     };
-
-
+   
 
   const handleSelectChange = (event) => {
     const selectedCountries = Array.from(
@@ -78,15 +83,6 @@ const Form = () => {
   };
 
 
-//*MANEJO DE ERRORES
-  const [errors, setErrors] = useState({
-    name: "",
-    dificultad: "",
-    duracion: "",
-    temporada: "",
-    continent: "",
-    country: "",
-  });
 
 //*SUBMIT
   const handleSubmit = async (event) => {
@@ -100,12 +96,15 @@ const Form = () => {
         continent: validateCountries(values.countries),
         country: validateCountries(values.countries),
       };
+     //hay errores? todos deberian ser false.
       
       setErrors(newErrors);
-      
+
       const formValid = Object.values(newErrors).every(error => !error);
+      //hay errores? todos deberian ser false, y every deberia devolver true. Y saltear mi condicion.
       
       if (!formValid) {
+      //Si, hay errores, detengo la ejecucion.
         return;
       }
 
@@ -121,21 +120,20 @@ const Form = () => {
           temporada: "",
           countries: []
       });
+
       navigate(PATHROUTES.ACTIVITIES)
       
     } catch (error) {
       if (error.response && error.response.data) {
 
         alert('Ya existe una actividad con ese nombre.');
-        window.location.reload();
+        // window.location.reload();
       }
       else console.error(error);
     }
   };
   
   const handleFilterChange = (continent) => {
-    // Hacer algo con el cambio de continente, por ejemplo, actualizar el estado
-    // o realizar cualquier acción necesaria en el componente Form
     console.log(`Cambió el continente a: ${continent}`);
   };
 
@@ -169,20 +167,26 @@ const Form = () => {
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1>Crear actividad</h1>
+
         <label className={styles.label}>
           Nombre: <input className={styles.input} type="text" name="name" value={values.name} onChange={handleChange} placeholder="Ingresa nombre de la actividad" />
           {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
-          
         </label>
+
+
         <label className={styles.label}>
-          Dificultad: <input className={styles.input} type="number" min="1" max="5" name="dificultad" value={values.dificultad} onChange={handleChange} placeholder="Ingresa la dificultad"/>
+          Dificultad: <input className={styles.input} type="number" name="dificultad" value={values.dificultad} onChange={handleChange} placeholder="Ingresa la dificultad"/>
           {errors.dificultad && <p className={styles.errorMessage}>{errors.dificultad}</p>}
         </label>
+
+
         <label className={styles.label}>
           Duracion (hs): <input className={styles.input} type="number" min="0" name="duracion" value={values.duracion} onChange={handleChange} placeholder="Ingresa la duración" />
           {errors.duracion && <p className={styles.errorMessage}>{errors.duracion}</p>}
         </label>
-          Temporada: 
+
+
+        Temporada: 
         <select className={styles.select} name="temporada" value={values.temporada} onChange={handleChange} >
             <option value="">Selecciona una temporada</option>
             <option value="Verano">Verano</option>
@@ -192,20 +196,27 @@ const Form = () => {
           </select>
           {errors.temporada && <p className={styles.errorMessage}>{errors.temporada}</p>}
 
+
+
         Continente:
         <Filters onChange={handleFilterChange} className={styles.selectForm}/>
         <label className={styles.label}>
         {errors.continent && <p className={styles.errorMessage}>{errors.continent}</p>}
 
-          Países: (aprieta CTRL para seleccionar varios)
-          <select className={styles.input} name="countries" multiple value={values.countries} onChange={handleSelectChange}>
+
+        Países: (aprieta CTRL para seleccionar varios)
+        <select className={styles.input} name="countries" multiple value={values.countries} onChange={handleSelectChange}>
             {countryNames.map((name) => (
               <option key={name} value={name}>
                 {name}
               </option>
             ))}
           </select>
+
+
         </label>
+
+
         <button type="submit" className={styles.btn}>Crear actividad turística</button>
       </form>
 

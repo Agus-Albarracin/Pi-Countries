@@ -16,6 +16,9 @@ import { getCountries, resetCountries, getActivities} from "../../redux/actions"
 // Styles
 import styles from './Form.module.css';
 
+//Para poder hacer las modificaciones es mejor setear los valores iniciales actuales y enviarlos.
+//De esa manera voy a poder modificar individualmente los campos.
+
 const UpdateActivities = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -68,27 +71,24 @@ const UpdateActivities = () => {
         //* Copia el estado actual de la actividad
         const updatedActivity = { ...activityData };
 
-      
-        // Actualiza el campo modificado
-        Object.entries(values).forEach(([key, value]) => {
-          if (value !== activityData[key]) {
-            updatedActivity[key] = value;
+        //Object.value(values).forEach(([])) me deja iterar en la key pero no en el value.
+        Object.entries(values).forEach(([valorInicial, elValorModificado]) => {
+          if (activityData[valorInicial] !== elValorModificado) {
+            updatedActivity[valorInicial] = elValorModificado;
           }
         });
         console.log(updatedActivity)
 
+
         const confirmUpdated = window.confirm("¿Estás seguro que deseas modificar los datos de la actividad?");
-      
-        if (!confirmUpdated) {
-        // Si el usuario elige "Cancelar" en la alerta, no hagas nada
-        return;
-        }
+        if (!confirmUpdated) { return;}
+
+
         try {
-          // Cambia el método a put o patch y ajusta la URL según la lógica de tu servidor
           await axios.put("http://localhost:3001/updateactivities", updatedActivity);
-          const successfulMessage = `Se ha modificado la actividad turística: ${updatedActivity.name || activityData.name}`;
           console.log(updatedActivity);
-          alert(successfulMessage);
+          
+          alert("Se ha modificado la actividad turística");
           setValues({
             selectedActivity: [],
             name: "",
@@ -97,11 +97,11 @@ const UpdateActivities = () => {
             temporada: "",
             countries: [],
           });
-          navigate(PATHROUTES.FORM);
+          navigate(PATHROUTES.ACTIVITIES);
         } catch (error) {
           if (error.response && error.response.data) {
             alert(`Error: ${error.response.data.message}`);
-            // Maneja el error según tus necesidades
+            
           } else {
             console.error(error);
           }
