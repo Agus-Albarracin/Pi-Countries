@@ -58,8 +58,6 @@ const Form = () => {
   useEffect(() => {
     dispatch(getCountries());
     dispatch(resetCountries());
-
-
   }, [dispatch]);
  
   useEffect(() => {

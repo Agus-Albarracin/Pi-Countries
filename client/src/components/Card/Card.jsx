@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // Styles
 import styles from './Card.module.css'
 
-const Card = ({ id, name, image, continente }) => {
+const Card = ({ id, name, image, continente, poblacion }) => {
     return (
         <div className={styles.card}>
 
@@ -20,6 +20,7 @@ const Card = ({ id, name, image, continente }) => {
             <div className={styles.nameId}>
                  <h2 className={styles.title}>{name}</h2>
                  <h2 className={styles.id}>{id}</h2>
+                 <h2 className={styles.title}>Poblacion: {poblacion}</h2>
             </div>
 
                  <h2 className={styles.continente}>Continente: {continente}</h2>

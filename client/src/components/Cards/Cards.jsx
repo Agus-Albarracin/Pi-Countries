@@ -12,6 +12,7 @@ const Cards = ({currentCards}) => {
                 id={country?.id}
                 name={country?.name}
                 image={country?.image}
+                poblacion={country?.poblacion}
                 continente={country?.continente} />
             ))}
         </div>
